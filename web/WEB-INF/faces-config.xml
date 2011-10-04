@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!-- =========== FULL CONFIGURATION FILE ================================== -->
+
+<faces-config version="1.2" 
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+    
+    <managed-bean>
+        <managed-bean-name>TipoMB</managed-bean-name>
+        <managed-bean-class>br.com.hslife.catu.control.TipoMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>LoginMB</managed-bean-name>
+        <managed-bean-class>br.com.hslife.catu.control.LoginMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>ClienteMB</managed-bean-name>
+        <managed-bean-class>br.com.hslife.catu.control.ClienteMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>StatusMB</managed-bean-name>
+        <managed-bean-class>br.com.hslife.catu.control.StatusMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>SetorMB</managed-bean-name>
+        <managed-bean-class>br.com.hslife.catu.control.SetorMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>AtendimentoMB</managed-bean-name>
+        <managed-bean-class>br.com.hslife.catu.control.AtendimentoMB</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <lifecycle>
+        <phase-listener>br.com.hslife.catu.listener.AutorizaListener</phase-listener>
+    </lifecycle>
+
+    <converter>
+        <converter-id>simnaoconverter</converter-id>
+        <converter-class>br.com.hslife.catu.converter.SimNaoConverter</converter-class>
+    </converter>
+
+    <validator>
+        <validator-id>emailvalidate</validator-id>
+        <validator-class>br.com.hslife.catu.validate.EmailValidate</validator-class>
+    </validator>
+
+    <navigation-rule>
+        <from-view-id>/login.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>sucesso</from-outcome>
+            <to-view-id>/principal.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>sair</from-outcome>
+            <to-view-id>/login.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+        <from-view-id>/listTipo.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>addTipo</from-outcome>
+            <to-view-id>/formTipo.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editTipo</from-outcome>
+            <to-view-id>/formTipo.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/listStatus.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>addStatus</from-outcome>
+            <to-view-id>/formStatus.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editStatus</from-outcome>
+            <to-view-id>/formStatus.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/listSetor.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>addSetor</from-outcome>
+            <to-view-id>/formSetor.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editSetor</from-outcome>
+            <to-view-id>/formSetor.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/listCliente.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>addCliente</from-outcome>
+            <to-view-id>/formCliente.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editCliente</from-outcome>
+            <to-view-id>/formCliente.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/listLogin.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>addLogin</from-outcome>
+            <to-view-id>/formLogin.jsp</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>editLogin</from-outcome>
+            <to-view-id>/formSenha.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/listSeleciona.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>addAtendimento</from-outcome>
+            <to-view-id>/formAtendimento.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/listAtendimento.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editAtendimento</from-outcome>
+            <to-view-id>/formAtendimento.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>editSenha</from-outcome>
+            <to-view-id>/formSenha.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/listLogin.jsp</from-view-id>
+        <navigation-case>
+            <from-outcome>editPerfil</from-outcome>
+            <to-view-id>/editLogin.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>acessoNegado</from-outcome>
+            <to-view-id>/acessonegado.jsp</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

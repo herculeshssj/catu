@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <!-- NÃO ALTERE ESTAS LINHAS -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <!-- NÃO ALTERE ESTAS LINHAS -->
+
+    <!-- No lugar de 'localhost', informe o endereço do servidor.
+         Caso a porta padrão do PostgreSQL seja diferente altere a porta
+         Informe também o nome do banco de dados a ser utilizado
+    -->
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/catu</property>
+
+
+    <!-- No lugar de 'postgres', informe o usuário do banco de dados -->
+    <property name="hibernate.connection.username">root</property>
+
+
+    <!-- No lugar de 'postgres', informe a senha do usuário do banco de dados -->
+    <property name="hibernate.connection.password">root</property>
+
+
+    <!-- NÃO ALTERE ESTAS LINHAS -->   
+    <mapping class="br.com.hslife.catu.model.Login"/>
+    <mapping class="br.com.hslife.catu.model.Cliente"/>
+    <mapping class="br.com.hslife.catu.model.Endereco"/>
+    <mapping class="br.com.hslife.catu.model.Setor"/>
+    <mapping class="br.com.hslife.catu.model.Status"/>
+    <mapping class="br.com.hslife.catu.model.Tipo"/>
+    <mapping class="br.com.hslife.catu.model.Atendimento"/>
+    <!-- NÃO ALTERE ESTAS LINHAS -->
+  </session-factory>
+</hibernate-configuration>
