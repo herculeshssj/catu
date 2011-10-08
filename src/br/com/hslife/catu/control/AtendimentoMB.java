@@ -1,69 +1,11 @@
-/***
-
-    Copyright (c) 2010, 2011 Hércules S. S. José
-
-
-
-    Este arquivo é parte do programa CATU.
-
-    CATU é um software livre; você pode redistribui-lo e/ou 
-
-    modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
-
-    publicada pela Fundação do Software Livre (FSF); na versão 2.1 da 
-
-    Licença.
-
-
-
-    Este programa é distribuído na esperança que possa ser útil, 
-
-    mas SEM NENHUMA GARANTIA; sem uma garantia implicita de ADEQUAÇÂO a qualquer
-
-    MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral Menor GNU 
-    
-    em português para maiores detalhes.
-
-
-
-    Você deve ter recebido uma cópia da Licença Pública Geral Menor GNU sob o 
-    
-    nome de "LICENSE.TXT" junto com este programa, se não, acesse o site HSlife no 
-
-    endereco www.hslife.com.br ou escreva para a Fundação do Software Livre(FSF) Inc., 
-
-    51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
-
-
-
-    Para mais informações sobre o programa CATU e seus autores acesse o 
-
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
-
-    Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
-
-    Marco II - Nova Iguaçu, RJ, Brasil.
-
-***/
-
 package br.com.hslife.catu.control;
 
-import br.com.hslife.catu.dao.AtendimentoDao;
-import br.com.hslife.catu.dao.ClienteDao;
-import br.com.hslife.catu.dao.SetorDao;
-import br.com.hslife.catu.dao.StatusDao;
-import br.com.hslife.catu.dao.TipoDao;
-import br.com.hslife.catu.model.Atendimento;
-import br.com.hslife.catu.model.Cliente;
-import br.com.hslife.catu.model.Login;
-import br.com.hslife.catu.model.Setor;
-import br.com.hslife.catu.model.Status;
-import br.com.hslife.catu.model.Tipo;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
@@ -71,11 +13,26 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import br.com.hslife.catu.dao.AtendimentoDao;
+import br.com.hslife.catu.dao.ClienteDao;
+import br.com.hslife.catu.dao.StatusDao;
+import br.com.hslife.catu.dao.TipoDao;
+import br.com.hslife.catu.model.Atendimento;
+import br.com.hslife.catu.model.Cliente;
+import br.com.hslife.catu.model.Login;
+import br.com.hslife.catu.model.Status;
+import br.com.hslife.catu.model.Tipo;
+import br.com.hslife.catu.service.EmailService;
 
 public class AtendimentoMB {
+	
+	// Constantes para definir o tipo de envio de e-mail
+	private static final int EMAIL_INCLUSAO = 1;
+	private static final int EMAIL_EDICAO = 2;
 
     private Atendimento atendimento;
     private Cliente cliente;
@@ -88,12 +45,10 @@ public class AtendimentoMB {
     // Ids das chaves estrangeiras
     private Long idTipo;
     private Long idStatus;
-    private Long idSetor;
     private Long idCliente;
     // Listagem dos registros das tabelas relacionadas
     private List<SelectItem> listaStatus;
     private List<SelectItem> listaTipo;
-    private List<SelectItem> listaSetor;
     private List<Cliente> listaClientes;
     // Flag que indica quais componentes que serão mostrados ou ativados
     private Boolean isNovo;
@@ -127,12 +82,6 @@ public class AtendimentoMB {
             getListaTipo().add(new SelectItem(t.getId(), t.getDescricao()));
         }
 
-        setListaSetor(new ArrayList<SelectItem>());
-        List<Setor> listaS = new ArrayList<Setor>();
-        listaS = getDao().listarTodos(AtendimentoDao.SETOR);
-        for (Setor s : listaS) {
-            getListaSetor().add(new SelectItem(s.getId(), s.getDescricao()));
-        }
     }
 
     public String novoAtendimento() {
@@ -146,8 +95,7 @@ public class AtendimentoMB {
         setCliente(daoC.buscar(getIdCliente()));
         getAtendimento().setIdCliente(getCliente());
         setIsNovo((Boolean) true);
-        setIdTipo((Long) 0l);
-        setIdSetor((Long) 0l);
+        setIdTipo((Long) 0l);        
         setIdStatus((Long) 0l);
         carregaCombos();
         return "addAtendimento";
@@ -157,23 +105,19 @@ public class AtendimentoMB {
         FacesContext contexto = FacesContext.getCurrentInstance();
         HttpSession sessao = (HttpSession) contexto.getExternalContext().getSession(false);
         Login u = (Login) sessao.getAttribute("usuarioLogado");
-        //atendimento.setIdOperador(u);
-        //atendimento.setDataAbertura(new Date());
-        //atendimento.getIdEntidade().setId(idCliente);
-
+        atendimento.setIdOperador(u);
+        atendimento.setDataAbertura(new Date());
+        atendimento.setIdCliente(new ClienteDao().buscar(idCliente));
         getAtendimento().setIdTipo(new TipoDao().buscar(getIdTipo()));
-
-        getAtendimento().setIdSetor(new SetorDao().buscar(getIdSetor()));
-
         getAtendimento().setIdStatus(new StatusDao().buscar(getIdStatus()));
-
         StatusDao daoSit = new StatusDao();
         if (daoSit.buscar(getIdStatus()).getEncerra()) {
             getAtendimento().setDataEncerramento(new Date());
             getAtendimento().getIdStatus().setEncerra(true);
         }
-        getDao().salvar(getAtendimento());
+        getDao().salvar(getAtendimento());        
         if (getDao().getErrorMessage() == null) {
+        	enviaEmail(EMAIL_INCLUSAO);
             setMsg("Atendimento registrado com sucesso!");
         } else {
             setMsg("Erro ao registrar atendimento: " + getDao().getErrorMessage());
@@ -194,8 +138,7 @@ public class AtendimentoMB {
             setCliente(daoC.buscar(getAtendimento().getIdCliente().getId()));
             getAtendimento().setIdCliente(getCliente());
             setIdCliente(getAtendimento().getIdCliente().getId());
-            setIdTipo(getAtendimento().getIdTipo().getId());
-            setIdSetor(getAtendimento().getIdSetor().getId());
+            setIdTipo(getAtendimento().getIdTipo().getId());            
             setIdStatus(getAtendimento().getIdStatus().getId());
             resultado = "editAtendimento";
         } else {
@@ -208,18 +151,19 @@ public class AtendimentoMB {
 
     public void salvarAlteracoes() {
         FacesContext contexto = FacesContext.getCurrentInstance();
-        getAtendimento().getIdCliente().setId(getIdCliente());
-        getAtendimento().getIdTipo().setId(getIdTipo());
-        getAtendimento().getIdSetor().setId(getIdSetor());
-        getAtendimento().getIdStatus().setId(getIdStatus());
+        atendimento.setIdCliente(new ClienteDao().buscar(idCliente));
+        getAtendimento().setIdTipo(new TipoDao().buscar(getIdTipo()));
+        getAtendimento().setIdStatus(new StatusDao().buscar(getIdStatus()));
+        atendimento.setDataAlteracao(new Date());
         StatusDao daoSit = new StatusDao();
         if (daoSit.buscar(idStatus).getEncerra()) {
             getAtendimento().setDataEncerramento(new Date());
             getAtendimento().getIdStatus().setEncerra(true);
         }
-        getDao().alterar(getAtendimento());
+        getDao().alterar(getAtendimento());        
         if (getDao().getErrorMessage() == null) {
-            setMsg("Atendimento alterado com sucesso!");
+        	enviaEmail(EMAIL_EDICAO);
+            setMsg("Atendimento alterado com sucesso!");            
         } else {
             setMsg("Erro ao alterar atendimento: " + getDao().getErrorMessage());
         }
@@ -261,7 +205,7 @@ public class AtendimentoMB {
         parametros.put("cidade", getAtendimento().getIdCliente().getEndereco().getCidade());
         parametros.put("uf", getAtendimento().getIdCliente().getEndereco().getUf());
         parametros.put("cep", getAtendimento().getIdCliente().getEndereco().getCep());
-        parametros.put("setor", getAtendimento().getIdSetor().getDescricao());
+        parametros.put("setor", getAtendimento().getIdCliente().getIdSetor().getDescricao());
         parametros.put("email", getAtendimento().getIdCliente().getEmail());
         parametros.put("operador", getAtendimento().getIdOperador().getNomeUsuario());
         parametros.put("dataInicio", getAtendimento().getDataAbertura());
@@ -330,6 +274,61 @@ public class AtendimentoMB {
         FacesMessage mensagem = new FacesMessage(getMsg());
         contexto.addMessage("lstEntidade", mensagem);
     }
+    
+    private void enviaEmail(int opcao) {
+    	// Envia um e-mail para o cliente com as informações do atendimento
+    	StringBuilder textoEmail = new StringBuilder();
+    			
+    	// Pega a data e hora atual
+    	Date hoje = new Date();
+    			
+    	// Mensagem do e-mail
+    	switch (opcao) {
+    		case EMAIL_INCLUSAO : 
+    			textoEmail.append("Prezado\n\n");
+    	    	textoEmail.append("Segue abaixo os dados do seu atendimento:\n\n\n");
+    	    	textoEmail.append("Data de abertura: " + atendimento.getDataAbertura() + "\n\n");
+    	    	textoEmail.append("Operador: " + atendimento.getIdOperador().getNomeUsuario() + "\n\n");
+    	    	textoEmail.append("Situação do atendimento: " + atendimento.getIdStatus().getDescricao() + "\n\n");
+    	    	textoEmail.append("Tipo de suporte: " + atendimento.getIdTipo().getDescricao() + "\n\n");
+    	    	textoEmail.append("Prioridade: " + atendimento.getPrioridade() + "\n\n");
+    	    	textoEmail.append("Custo do atendimento: R$ " + atendimento.getCusto() + "\n\n");
+    	    	textoEmail.append("Descrição do problema:\n");
+    	    	textoEmail.append(atendimento.getProblema() + "\n\n\n");
+    	    	textoEmail.append("Observações:\n");
+    	    	textoEmail.append(atendimento.getProblema() + "\n\n\n");
+    	    	textoEmail.append("Para mais detalhes entre em contato pelo e-mail <contato@hslife.com.br>.");    	    	
+    	    	break;
+    		case EMAIL_EDICAO : 
+    			textoEmail.append("Prezado\n\n");
+    	    	textoEmail.append("Seu atendimento foi alterado por nossa equipe. Confira abaixo as novas informações:\n\n\n");
+    	    	textoEmail.append("Data de modificação: " + atendimento.getDataAlteracao() + "\n\n");
+    	    	textoEmail.append("Modificado por: " + atendimento.getIdOperador().getNomeUsuario() + "\n\n");
+    	    	textoEmail.append("Situação do atendimento: " + atendimento.getIdStatus().getDescricao() + "\n\n");
+    	    	textoEmail.append("Tipo de suporte: " + atendimento.getIdTipo().getDescricao() + "\n\n");
+    	    	textoEmail.append("Prioridade: " + atendimento.getPrioridade() + "\n\n");
+    	    	textoEmail.append("Custo do atendimento: R$ " + atendimento.getCusto() + "\n\n");
+    	    	textoEmail.append("Descrição do problema:\n");
+    	    	textoEmail.append(atendimento.getProblema() + "\n\n\n");
+    	    	textoEmail.append("Descrição da solução:\n");
+    	    	textoEmail.append(atendimento.getProblema() + "\n\n\n");
+    	    	textoEmail.append("Observações:\n");
+    	    	textoEmail.append(atendimento.getProblema() + "\n\n\n");
+    	    	textoEmail.append("Para mais detalhes entre em contato pelo e-mail <contato@hslife.com.br>.");
+    	    	break;
+    	}		
+
+    	try {
+    			
+    		// Envia o e-mail
+    		EmailService emailService = new EmailService();
+    		emailService.enviaEmailSimples("nao-responda", "noreply@hslife.com.br", atendimento.getIdCliente().getNomeCliente(), atendimento.getIdCliente().getEmail(), "[CATU] - Atendimento nº " + atendimento.getId(), textoEmail);    				
+    		
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
 
     /**
      * @return the atendimento
@@ -472,20 +471,6 @@ public class AtendimentoMB {
     }
 
     /**
-     * @return the idSetor
-     */
-    public Long getIdSetor() {
-        return idSetor;
-    }
-
-    /**
-     * @param idSetor the idSetor to set
-     */
-    public void setIdSetor(Long idSetor) {
-        this.idSetor = idSetor;
-    }
-
-    /**
      * @return the idCliente
      */
     public Long getIdCliente() {
@@ -525,20 +510,6 @@ public class AtendimentoMB {
      */
     public void setListaTipo(List<SelectItem> listaTipo) {
         this.listaTipo = listaTipo;
-    }
-
-    /**
-     * @return the listaSetor
-     */
-    public List<SelectItem> getListaSetor() {
-        return listaSetor;
-    }
-
-    /**
-     * @param listaSetor the listaSetor to set
-     */
-    public void setListaSetor(List<SelectItem> listaSetor) {
-        this.listaSetor = listaSetor;
     }
 
     /**
@@ -582,6 +553,5 @@ public class AtendimentoMB {
     public void setDataAbertura(Date dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
-    
 
 }

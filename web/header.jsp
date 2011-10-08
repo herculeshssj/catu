@@ -1,51 +1,3 @@
-<%--
-
-    Copyright (c) 2010, 2011 Hércules S. S. José
-
-
-
-    Este arquivo é parte do programa CATU.
-
-    CATU é um software livre; você pode redistribui-lo e/ou 
-
-    modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
-
-    publicada pela Fundação do Software Livre (FSF); na versão 2.1 da 
-
-    Licença.
-
-
-
-    Este programa é distribuído na esperança que possa ser útil, 
-
-    mas SEM NENHUMA GARANTIA; sem uma garantia implicita de ADEQUAÇÂO a qualquer
-
-    MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral Menor GNU 
-    
-    em português para maiores detalhes.
-
-
-
-    Você deve ter recebido uma cópia da Licença Pública Geral Menor GNU sob o 
-    
-    nome de "LICENSE.TXT" junto com este programa, se não, acesse o site HSlife no 
-
-    endereco www.hslife.com.br ou escreva para a Fundação do Software Livre(FSF) Inc., 
-
-    51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
-
-
-
-    Para mais informações sobre o programa CATU e seus autores acesse o 
-
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
-
-    Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
-
-    Marco II - Nova Iguaçu, RJ, Brasil.
-
- --%>
-
 <%-- 
     Document   : header
     Created on : 28/10/2010, 15:06:49
@@ -87,10 +39,11 @@
                                 <ul>
                                     <li><a href="listLogin.jsf">Usuários</a></li>                                    
                                     <li><a href="listCliente.jsf">Clientes</a></li>
+                                    <li><a href="listSoftware.jsf">Software</a></li>
+                                    <li><a href="listMaquina.jsf">Máquinas</a></li>
                                     <li><a href="listSetor.jsf">Setores</a></li>
                                     <li><a href="listTipo.jsf">Tipos de atendimento</a></li>                                    
-                                    <li><a href="listStatus.jsf">Status dos atendimentos</a></li>
-                                    
+                                    <li><a href="listStatus.jsf">Status dos atendimentos</a></li>                                    
                                 </ul>
                             </li>
                             <li><a href="#">Atendimentos</a>
@@ -112,3 +65,14 @@
             <!-- Fim do Código do menu flutuante -->
 
             <div id="wrapper">
+            
+
+    <div id="content">
+
+        <div class="post" id="post-01">
+
+	<div class="post-info">
+
+                <strong><h:outputText value="#{LoginMB.usuarioLogado.nomeUsuario}"/>, seja bem vindo!</strong>
+
+            </div>

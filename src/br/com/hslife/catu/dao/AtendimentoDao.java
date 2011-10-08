@@ -1,67 +1,18 @@
-/***
-
-    Copyright (c) 2010, 2011 Hércules S. S. José
-
-
-
-    Este arquivo é parte do programa CATU.
-
-    CATU é um software livre; você pode redistribui-lo e/ou 
-
-    modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
-
-    publicada pela Fundação do Software Livre (FSF); na versão 2.1 da 
-
-    Licença.
-
-
-
-    Este programa é distribuído na esperança que possa ser útil, 
-
-    mas SEM NENHUMA GARANTIA; sem uma garantia implicita de ADEQUAÇÂO a qualquer
-
-    MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral Menor GNU 
-    
-    em português para maiores detalhes.
-
-
-
-    Você deve ter recebido uma cópia da Licença Pública Geral Menor GNU sob o 
-    
-    nome de "LICENSE.TXT" junto com este programa, se não, acesse o site HSlife no 
-
-    endereco www.hslife.com.br ou escreva para a Fundação do Software Livre(FSF) Inc., 
-
-    51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
-
-
-
-    Para mais informações sobre o programa CATU e seus autores acesse o 
-
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
-
-    Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
-
-    Marco II - Nova Iguaçu, RJ, Brasil.
-
-***/
-
 package br.com.hslife.catu.dao;
+
+import java.util.Date;
+import java.util.List;
 
 import br.com.hslife.catu.model.Atendimento;
 import br.com.hslife.catu.model.Cliente;
-import br.com.hslife.catu.model.Setor;
 import br.com.hslife.catu.model.Status;
 import br.com.hslife.catu.model.Tipo;
-import java.util.Date;
-import java.util.List;
 
 public class AtendimentoDao extends GenericDao implements InterfaceDao<Atendimento> {
 
     public static final int STATUS = 1;
-    public static final int TIPO = 2;
-    public static final int SETOR = 3;
-    public static final int CLIENTE = 4;
+    public static final int TIPO = 2; 
+    public static final int CLIENTE = 3;
 
     @Override
     public void salvar(Atendimento obj) {
@@ -106,7 +57,6 @@ public class AtendimentoDao extends GenericDao implements InterfaceDao<Atendimen
     public List listarTodos(int item) {
         List lista = null;
         switch (item) {            
-            case SETOR: lista =  findAll(Setor.class);break;
             case STATUS: lista =  findAll(Status.class);break;
             case TIPO: lista =  findAll(Tipo.class);break;            
             case CLIENTE: lista =  findAll(Cliente.class);break;

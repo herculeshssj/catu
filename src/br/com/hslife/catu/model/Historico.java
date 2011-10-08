@@ -14,12 +14,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Atendimento")
-public class Atendimento implements Serializable {
+@Table(name="Historico")
+public class Historico implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id; // chave primária da tabela
+    
+    private Long idAtendimento; // id do atendimento incluído/alterado
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAbertura; // data de abertura do atendimento
@@ -30,7 +32,7 @@ public class Atendimento implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataEncerramento; // data de encerramento do atendimento
 
-    @Column(columnDefinition="text", nullable=false)
+    @Column(columnDefinition="text")
     private String problema; // descrição detalhada do problema
 
     @Column(columnDefinition="text")
@@ -45,30 +47,30 @@ public class Atendimento implements Serializable {
     @Column
     private String prioridade; // define a prioridade do atendimento
 
-    @ManyToOne
-    @JoinColumn(name="idStatus")
-    private Status idStatus; // chave estrangeira para o status do atendimento
+    @Column
+    private Long idStatus; // chave estrangeira para o status do atendimento
 
-    @ManyToOne
-    @JoinColumn(name="idTipo")
-    private Tipo idTipo; // chave estrangeira para o tipo de atendimento
+    @Column
+    private Long idTipo; // chave estrangeira para o tipo de atendimento
 
-    @ManyToOne
-    @JoinColumn(name="idSetor", nullable=true)
-    private Setor idSetor; // chave estrangeira para o setor
+    @Column
+    private Long idSetor; // chave estrangeira para o setor
 
-    @ManyToOne
-    @JoinColumn(name="idCliente")
-    private Cliente idCliente; // chave estrangeira indicando o cliente que solicitou o atendimento
+    @Column
+    private Long idCliente; // chave estrangeira indicando o cliente que solicitou o atendimento
 
+    @Column
+    private Long idOperador; // chave estrangeira indicando o operador que abriu o atendimento
+    
     @ManyToOne
-    @JoinColumn(name="idOperador")
-    private Login idOperador; // chave estrangeira indicando o operador que abriu o atendimento
+    @JoinColumn(name="idLogin")
+    private Login idLogin; // login do usuário que realizou a última alteração no atendimento
+    
+    @Column
+    private String tipoAlteracao; // tipo de alteração realizada (inclusao, alteracao)
 
-    public Atendimento(){        
-       idStatus = new Status();
-       idTipo = new Tipo();      
-       idOperador = new Login();       
+    public Historico(){        
+        idLogin = new Login();       
     }
 
     /**
@@ -169,76 +171,6 @@ public class Atendimento implements Serializable {
         this.custo = custo;
     }
 
-    /**
-     * @return the idStatus
-     */
-    public Status getIdStatus() {
-        return idStatus;
-    }
-
-    /**
-     * @param idStatus the idStatus to set
-     */
-    public void setIdStatus(Status idStatus) {
-        this.idStatus = idStatus;
-    }
-
-    /**
-     * @return the idTipo
-     */
-    public Tipo getIdTipo() {
-        return idTipo;
-    }
-
-    /**
-     * @param idTipo the idTipo to set
-     */
-    public void setIdTipo(Tipo idTipo) {
-        this.idTipo = idTipo;
-    }
-
-    /**
-     * @return the idSetor
-     */
-    public Setor getIdSetor() {
-        return idSetor;
-    }
-
-    /**
-     * @param idSetor the idSetor to set
-     */
-    public void setIdSetor(Setor idSetor) {
-        this.idSetor = idSetor;
-    }
-
-    /**
-     * @return the idCliente
-     */
-    public Cliente getIdCliente() {
-        return idCliente;
-    }
-
-    /**
-     * @param idCliente the idCliente to set
-     */
-    public void setIdCliente(Cliente idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    /**
-     * @return the idOperador
-     */
-    public Login getIdOperador() {
-        return idOperador;
-    }
-
-    /**
-     * @param idOperador the idOperador to set
-     */
-    public void setIdOperador(Login idOperador) {
-        this.idOperador = idOperador;
-    }
-
 	public Date getDataAlteracao() {
 		return dataAlteracao;
 	}
@@ -253,6 +185,70 @@ public class Atendimento implements Serializable {
 
 	public void setPrioridade(String prioridade) {
 		this.prioridade = prioridade;
+	}
+
+	public Long getIdStatus() {
+		return idStatus;
+	}
+
+	public void setIdStatus(Long idStatus) {
+		this.idStatus = idStatus;
+	}
+
+	public Long getIdTipo() {
+		return idTipo;
+	}
+
+	public void setIdTipo(Long idTipo) {
+		this.idTipo = idTipo;
+	}
+
+	public Long getIdSetor() {
+		return idSetor;
+	}
+
+	public void setIdSetor(Long idSetor) {
+		this.idSetor = idSetor;
+	}
+
+	public Long getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public Long getIdOperador() {
+		return idOperador;
+	}
+
+	public void setIdOperador(Long idOperador) {
+		this.idOperador = idOperador;
+	}
+
+	public Login getIdLogin() {
+		return idLogin;
+	}
+
+	public void setIdLogin(Login idLogin) {
+		this.idLogin = idLogin;
+	}
+
+	public String getTipoAlteracao() {
+		return tipoAlteracao;
+	}
+
+	public void setTipoAlteracao(String tipoAlteracao) {
+		this.tipoAlteracao = tipoAlteracao;
+	}
+
+	public Long getIdAtendimento() {
+		return idAtendimento;
+	}
+
+	public void setIdAtendimento(Long idAtendimento) {
+		this.idAtendimento = idAtendimento;
 	}
 
 }

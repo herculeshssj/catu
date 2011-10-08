@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RAC_CUSTOM" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="539" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28">
-	<property name="ireport.zoom" value="1.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CATU_OS" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="539" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28" whenResourceMissingType="Empty">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="nomeCliente" class="java.lang.String"/>
@@ -26,7 +26,7 @@
 			<staticText>
 				<reportElement x="269" y="25" width="272" height="31"/>
 				<textElement textAlignment="Center">
-					<font size="24" isBold="true"/>
+					<font size="24" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[ORDEM DE SERVIÇO]]></text>
 			</staticText>
@@ -44,7 +44,7 @@
 			<staticText>
 				<reportElement x="367" y="56" width="18" height="20"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[nº]]></text>
 			</staticText>
@@ -69,49 +69,49 @@
 			<staticText>
 				<reportElement x="321" y="11" width="64" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[TELEFONE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2" y="45" width="70" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[ENDEREÇO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="176" y="79" width="55" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[CIDADE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="426" y="79" width="36" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[CEP]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2" y="147" width="159" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[SETOR / DEPARTAMENTO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="357" y="79" width="28" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[UF]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="2" y="79" width="56" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[BAIRRO]]></text>
 			</staticText>
@@ -121,49 +121,49 @@
 			<staticText>
 				<reportElement x="0" y="113" width="144" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[TÉCNICO RESPONSÁVEL]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="176" y="113" width="68" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[INÍCIO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="287" y="113" width="56" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[TÉRMINO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="401" y="113" width="56" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[SERVIÇO]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="207" width="161" height="20"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[SOLICITAÇÃO DO CLIENTE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="0" y="417" width="100" height="20"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[OBSERVAÇÕES]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="1" y="312" width="274" height="20"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[SERVIÇO REALIZADO / SOLUÇÃO ENCONTRADA]]></text>
 			</staticText>
@@ -173,88 +173,94 @@
 			<staticText>
 				<reportElement x="2" y="11" width="111" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[NOME DO CLIENTE]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="321" y="25" width="108" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{telSolicitante}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="59" width="539" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{logradouro}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="93" width="163" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{bairro}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="176" y="93" width="167" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{cidade}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="357" y="93" width="38" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{uf}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="426" y="93" width="113" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{cep}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="1" y="127" width="160" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{operador}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="401" y="127" width="138" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{tipoAtend}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="1" y="227" width="538" height="85"/>
-				<textElement/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{problema}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="1" y="332" width="538" height="85"/>
-				<textElement/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{solucao}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="0" y="437" width="539" height="87"/>
-				<textElement/>
+				<textElement>
+					<font isStrikeThrough="false"/>
+				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{observacao}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="431" y="11" width="64" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[CELULAR]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="2" y="25" width="310" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{nomeCliente}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="1" y="161" width="286" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{setor}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy HH.mm.ss">
+			<textField pattern="dd/MM/yyyy HH.mm.ss" isBlankWhenNull="true">
 				<reportElement x="176" y="127" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$P{dataInicio}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy HH.mm.ss">
+			<textField pattern="dd/MM/yyyy HH.mm.ss" isBlankWhenNull="true">
 				<reportElement x="287" y="127" width="100" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$P{dataTermino}]]></textFieldExpression>
@@ -262,16 +268,16 @@
 			<staticText>
 				<reportElement x="287" y="147" width="100" height="14"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[E-MAIL]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="287" y="161" width="252" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{email}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="431" y="25" width="108" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{celSolicitante}]]></textFieldExpression>
@@ -283,14 +289,14 @@
 			<staticText>
 				<reportElement x="43" y="50" width="149" height="20"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[ASSINATURA DO CLIENTE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="355" y="50" width="159" height="20"/>
 				<textElement>
-					<font size="11" isBold="true"/>
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[ASSINATURA DO TÉCNICO]]></text>
 			</staticText>

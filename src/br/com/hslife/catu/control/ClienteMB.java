@@ -1,65 +1,21 @@
-/***
-
-    Copyright (c) 2010, 2011 Hércules S. S. José
-
-
-
-    Este arquivo é parte do programa CATU.
-
-    CATU é um software livre; você pode redistribui-lo e/ou 
-
-    modificá-lo dentro dos termos da Licença Pública Geral Menor GNU como 
-
-    publicada pela Fundação do Software Livre (FSF); na versão 2.1 da 
-
-    Licença.
-
-
-
-    Este programa é distribuído na esperança que possa ser útil, 
-
-    mas SEM NENHUMA GARANTIA; sem uma garantia implicita de ADEQUAÇÂO a qualquer
-
-    MERCADO ou APLICAÇÃO EM PARTICULAR. Veja a Licença Pública Geral Menor GNU 
-    
-    em português para maiores detalhes.
-
-
-
-    Você deve ter recebido uma cópia da Licença Pública Geral Menor GNU sob o 
-    
-    nome de "LICENSE.TXT" junto com este programa, se não, acesse o site HSlife no 
-
-    endereco www.hslife.com.br ou escreva para a Fundação do Software Livre(FSF) Inc., 
-
-    51 Franklin St, Fifth Floor, Boston, MA  02110-1301, USA.
-
-
-
-    Para mais informações sobre o programa CATU e seus autores acesse o 
-
-    endereço www.hslife.com.br, pelo e-mail contato@hslife.com.br ou escreva para 
-
-    Hércules S. S. José, Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt 404, 
-
-    Marco II - Nova Iguaçu, RJ, Brasil.
-
-***/
-
 package br.com.hslife.catu.control;
 
-import br.com.hslife.catu.dao.ClienteDao;
-import br.com.hslife.catu.model.Endereco;
-import br.com.hslife.catu.model.Cliente;
-import br.com.hslife.catu.model.Login;
-import br.com.hslife.catu.util.Estados;
-import br.com.hslife.catu.util.TipoLogradouro;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpSession;
+
+import br.com.hslife.catu.dao.ClienteDao;
+import br.com.hslife.catu.dao.SetorDao;
+import br.com.hslife.catu.model.Cliente;
+import br.com.hslife.catu.model.Endereco;
+import br.com.hslife.catu.model.Login;
+import br.com.hslife.catu.model.Setor;
+import br.com.hslife.catu.util.Estados;
+import br.com.hslife.catu.util.TipoLogradouro;
 
 public class ClienteMB {
 
@@ -67,10 +23,12 @@ public class ClienteMB {
     private Endereco endereco;
     private ClienteDao dao;
     private Long idCliente;
+    private Long idSetor;
     private Long idEndereco;
     private String busca;
     private String msg;
     private List<Cliente> listaClientes;
+    private List<SelectItem> listaSetor;
     private List<SelectItem> estados;
     private List<SelectItem> tipoLogradouro;
 
@@ -80,8 +38,14 @@ public class ClienteMB {
         dao = new ClienteDao();
         listaClientes = new ArrayList<Cliente>();
         listaClientes = dao.listarTodos();
-        estados = new ArrayList<SelectItem>();
+    }
+    
+    private void carregaCombos() {
+
+    	estados = new ArrayList<SelectItem>();
         tipoLogradouro = new ArrayList<SelectItem>();
+        listaSetor = new ArrayList<SelectItem>();
+        
         // Carrega a combobox com os estados
         for (int i = 0; i < Estados.getTamanho(); i++) {
             estados.add(i, new SelectItem(Estados.getEstados(i), Estados.getEstados(i)));
@@ -89,6 +53,10 @@ public class ClienteMB {
         // Carrega a combobox com os tipos de logradouro
         for (int i = 0; i < TipoLogradouro.getTamanho(); i++) {
             tipoLogradouro.add(i, new SelectItem(TipoLogradouro.getTipoLogradouro(i), TipoLogradouro.getTipoLogradouro(i)));
+        }
+    	        
+        for (Setor s : dao.listaSetores()) {
+            listaSetor.add(new SelectItem(s.getId(), s.getDescricao()));
         }
     }
 
@@ -104,6 +72,7 @@ public class ClienteMB {
         } else {
             setCliente(new Cliente());
             endereco = new Endereco();
+            carregaCombos();
             resultado = "addCliente";
         }
         return resultado;
@@ -118,6 +87,7 @@ public class ClienteMB {
         } else {
             if (cliente.getId() == null || cliente.getId() == 0) {
                 getCliente().setEndereco(getEndereco());
+                cliente.setIdSetor(new SetorDao().buscar(idSetor));
                 dao.salvar(cliente);
                 if (getDao().getErrorMessage() == null) {
                     setMsg("Cadastro realizado com sucesso!");
@@ -129,6 +99,7 @@ public class ClienteMB {
             } else {
                 getEndereco().setId(getIdEndereco());
                 getCliente().setEndereco(getEndereco());
+                cliente.setIdSetor(new SetorDao().buscar(idSetor));
                 dao.alterar(cliente);
                 if (getDao().getErrorMessage() == null) {
                     setMsg("Alteração realizada com sucesso!");
@@ -149,6 +120,7 @@ public class ClienteMB {
         cliente = dao.buscar(idCliente);
         setEndereco(getCliente().getEndereco());
         setIdEndereco(getCliente().getEndereco().getId());
+        carregaCombos();
         if (getDao().getErrorMessage() == null) {
             resultado = "editCliente";
         } else {
@@ -332,5 +304,21 @@ public class ClienteMB {
     public void setTipoLogradouro(List<SelectItem> tipoLogradouro) {
         this.tipoLogradouro = tipoLogradouro;
     }
+
+	public Long getIdSetor() {
+		return idSetor;
+	}
+
+	public void setIdSetor(Long idSetor) {
+		this.idSetor = idSetor;
+	}
+
+	public List<SelectItem> getListaSetor() {
+		return listaSetor;
+	}
+
+	public void setListaSetor(List<SelectItem> listaSetor) {
+		this.listaSetor = listaSetor;
+	}
     
 }
