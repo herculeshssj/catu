@@ -80,6 +80,8 @@
     <mapping class="br.com.hslife.catu.model.Status"/>
     <mapping class="br.com.hslife.catu.model.Tipo"/>
     <mapping class="br.com.hslife.catu.model.Atendimento"/>
+    <mapping class="br.com.hslife.catu.model.Maquina"/>
+    <mapping class="br.com.hslife.catu.model.Software"/>
     <!-- NÃO ALTERE ESTAS LINHAS -->
   </session-factory>
 </hibernate-configuration>

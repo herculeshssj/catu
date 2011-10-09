@@ -55,7 +55,7 @@
 				</textElement>
 				<text><![CDATA[Serviços de TI]]></text>
 			</staticText>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="387" y="56" width="100" height="20"/>
 				<textElement>
 					<font size="14"/>
