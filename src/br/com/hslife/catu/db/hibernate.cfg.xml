@@ -61,15 +61,15 @@
          Caso a porta padrão do PostgreSQL seja diferente altere a porta
          Informe também o nome do banco de dados a ser utilizado
     -->
-    <property name="hibernate.connection.url">jdbc:mysql://hslifeserver.hslife.local:3306/catu</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/catu</property>
 
 
     <!-- No lugar de 'postgres', informe o usuário do banco de dados -->
-    <property name="hibernate.connection.username">catu</property>
+    <property name="hibernate.connection.username">root</property>
 
 
     <!-- No lugar de 'postgres', informe a senha do usuário do banco de dados -->
-    <property name="hibernate.connection.password">catucacique</property>
+    <property name="hibernate.connection.password">root</property>
 
 
     <!-- NÃO ALTERE ESTAS LINHAS -->   
