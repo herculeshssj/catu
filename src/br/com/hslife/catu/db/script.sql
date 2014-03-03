@@ -102,4 +102,4 @@ alter table SoftwareInstalado add index FKC73F8143CF02921 (idSoftware), add cons
 
 -- Inclusão do usuário Admin
 
-INSERT INTO login (ativo, datacriacao, nomeusuario, perfil, usuariologin, usuariosenha) VALUES (true, '2011-01-01 00:00:00', 'Administrador do Sistema', 'ADMIN', 'admin', 'f865b53623b121fd34ee5426c792e5c33af8c227'); -- Senha: admin123
+INSERT INTO Login (ativo, datacriacao, nomeusuario, perfil, usuariologin, usuariosenha) VALUES (true, '2011-01-01 00:00:00', 'Administrador do Sistema', 'ADMIN', 'admin', 'f865b53623b121fd34ee5426c792e5c33af8c227'); -- Senha: admin123

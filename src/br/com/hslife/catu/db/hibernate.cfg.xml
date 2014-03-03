@@ -65,11 +65,11 @@
 
 
     <!-- No lugar de 'postgres', informe o usuário do banco de dados -->
-    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.username">catu</property>
 
 
     <!-- No lugar de 'postgres', informe a senha do usuário do banco de dados -->
-    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.connection.password">c4tvc4cik3</property>
 
 
     <!-- NÃO ALTERE ESTAS LINHAS -->   
