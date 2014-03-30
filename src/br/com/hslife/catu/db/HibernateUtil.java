@@ -57,7 +57,7 @@ import org.hibernate.SessionFactory;
  * @author Hércules
  */
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
     static {
         try {
@@ -74,6 +74,19 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
+        if (sessionFactory == null || sessionFactory.isClosed()) {
+        	try {
+                // Create the SessionFactory from standard (hibernate.cfg.xml)
+                // config file.
+                sessionFactory = new AnnotationConfiguration()
+                        .configure("br/com/hslife/catu/db/hibernate.cfg.xml")
+                        .buildSessionFactory();
+            } catch (Throwable ex) {
+                // Log the exception.
+                System.err.println("Initial SessionFactory creation failed." + ex);
+                throw new ExceptionInInitializerError(ex);
+            }
+        }
         return sessionFactory;
     }
 }
