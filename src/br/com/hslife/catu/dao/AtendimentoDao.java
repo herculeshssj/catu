@@ -102,7 +102,8 @@ public class AtendimentoDao extends GenericDao implements InterfaceDao<Atendimen
         return (List) search("Atendimento", campo, (String)valor);
     }
     
-    public List listarTodos(int item) {
+    @SuppressWarnings("rawtypes")
+	public List listarTodos(int item) {
         List lista = null;
         switch (item) {            
             case STATUS: lista =  findAll(Status.class);break;
