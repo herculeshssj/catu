@@ -48,8 +48,13 @@
 package br.com.hslife.catu.db;
 
 
+import java.sql.Connection;
+
 import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.CacheMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory object.
@@ -57,6 +62,7 @@ import org.hibernate.SessionFactory;
  * @author Hércules
  */
 public class HibernateUtil {
+	/*
     private static SessionFactory sessionFactory;
 
     static {
@@ -89,4 +95,69 @@ public class HibernateUtil {
         }
         return sessionFactory;
     }
+    */
+	
+	private static final SessionFactory sessionFactory;
+	private static final ThreadLocal<Session> sessionThread = new ThreadLocal<Session>();
+	private static final ThreadLocal<Transaction> transactionThread = new ThreadLocal<Transaction>();
+
+	static {
+		try {
+			sessionFactory = new AnnotationConfiguration().configure(
+					"br/com/hslife/catu/db/hibernate.cfg.xml")
+					.buildSessionFactory();
+		} catch (RuntimeException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	public static Session getSession() {
+		if (sessionThread.get() == null) {
+			Session session = sessionFactory.openSession();
+			session.setCacheMode(CacheMode.IGNORE);
+			sessionThread.set(session);
+			System.out.println("Nova sessão criada");
+		}
+		return (Session) sessionThread.get();
+	}
+	
+	public static Connection getConnection() {
+		return getSession().connection();
+	}
+
+	public static void closeSession() {
+		Session session = (Session) sessionThread.get();
+		if (session != null && session.isOpen()) {
+			sessionThread.set(null);
+			session.close();
+			System.out.println("Sessão atual fechada");
+		}
+	}
+
+	public static void beginTransaction() {
+		Transaction transaction = getSession().beginTransaction();
+		transactionThread.set(transaction);
+		System.out.println("Transacao iniciada");
+	}
+
+	public static void commitTransaction() {
+		Transaction transaction = (Transaction) transactionThread.get();
+		if (transaction != null && !transaction.wasCommitted()
+				&& !transaction.wasRolledBack()) {
+			transaction.commit();
+			transactionThread.set(null);
+			System.out.println("Transação finalizada com sucesso");
+		}
+	}
+
+	public static void rollbackTransaction() {
+		Transaction transaction = (Transaction) transactionThread.get();
+		if (transaction != null && !transaction.wasCommitted()
+				&& !transaction.wasRolledBack()) {
+			transaction.rollback();
+			transactionThread.set(null);
+			System.out.println("Transacao finalizada com falha. Alteraçoes desfeitas");
+		}
+	}
 }

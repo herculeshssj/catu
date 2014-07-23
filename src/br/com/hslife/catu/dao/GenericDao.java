@@ -117,55 +117,67 @@ public class GenericDao {
     }
 
     protected void save(Object obj) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
+        //session = HibernateUtil.getSessionFactory().openSession();
+        //transaction = session.beginTransaction();
         try {
-            session.save(obj);
-            transaction.commit();
+        	HibernateUtil.beginTransaction();
+        	HibernateUtil.getSession().save(obj);
+        	HibernateUtil.commitTransaction();
+        	// session.save(obj);
+            //transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
+        	HibernateUtil.rollbackTransaction();
+            //transaction.rollback();
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
             e.printStackTrace();
-        } finally {
+        } /*finally {
             if (session.isOpen()) {
                 session.close();
             }
-        }
+        }*/
     }
 
     protected void update(Object obj) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
+        //session = HibernateUtil.getSessionFactory().openSession();
+        //transaction = session.beginTransaction();
         try {
-            session.update(obj);
-            transaction.commit();
+        	HibernateUtil.beginTransaction();
+        	HibernateUtil.getSession().update(obj);
+        	HibernateUtil.commitTransaction();
+            //session.update(obj);
+            //transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
+        	HibernateUtil.rollbackTransaction();
+            //transaction.rollback();
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
             e.printStackTrace();
-        } finally {
+        } /*finally {
             if (session.isOpen()) {
                 session.close();
             }
-        }
+        }*/
     }
 
     protected void delete(Object obj) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
-        try {
-            try {
+        //session = HibernateUtil.getSessionFactory().openSession();
+        //transaction = session.beginTransaction();
+        try {        	
+            /*try {
                 session.delete(obj);
                 transaction.commit();
             } finally {
                 if (session.isOpen()) {
                     session.close();
                 }
-            }
+            }*/
+        	HibernateUtil.beginTransaction();
+        	HibernateUtil.getSession().delete(obj);
+        	HibernateUtil.commitTransaction();
         } catch (Exception e) {
-            transaction.rollback();
+        	HibernateUtil.rollbackTransaction();
+            //transaction.rollback();
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
             e.printStackTrace();
@@ -176,16 +188,17 @@ public class GenericDao {
      *  Busca específica usando resultado id informado
      */
     protected Object find(Class classe, long id) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        //session = HibernateUtil.getSessionFactory().openSession();
         Object resultado = null;
         try {
-            try {
+        	resultado = HibernateUtil.getSession().get(classe, id);
+            /*try {
                 resultado = session.get(classe, id);
             } finally {
                 if (session.isOpen()) {
                     session.close();
                 }
-            }
+            }*/
         } catch (Exception e) {
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
@@ -201,15 +214,15 @@ public class GenericDao {
      */
     protected Object find(Class classe, String campo, Object valor) {
         Object resultado = null;
-        session = HibernateUtil.getSessionFactory().openSession();
+        //session = HibernateUtil.getSessionFactory().openSession();
         try {
-            try {
-                resultado = session.createCriteria(classe).add(Restrictions.eq(campo, valor)).uniqueResult();
-            } finally {
-                if (session.isOpen()) {
-                    session.close();
-                }
-            }
+            //try {
+                resultado = HibernateUtil.getSession().createCriteria(classe).add(Restrictions.eq(campo, valor)).uniqueResult();
+            //} finally {
+                //if (session.isOpen()) {
+                  //  session.close();
+                //}
+            //}
         } catch (Exception e) {
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
@@ -224,16 +237,16 @@ public class GenericDao {
      * vazia (size = 0)
      */
     protected List<Object> findAll(Class classe, String campo, Object valor) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        //session = HibernateUtil.getSessionFactory().openSession();
         List<Object> lista = null;
         try {
-            try {
-                lista = session.createCriteria(classe).add(Expression.eq(campo, valor)).addOrder(Order.asc("id")).list();
-            } finally {
+            //try {
+                lista = HibernateUtil.getSession().createCriteria(classe).add(Expression.eq(campo, valor)).addOrder(Order.asc("id")).list();
+            /*} finally {
                 if (session.isOpen()) {
                     session.close();
                 }
-            }
+            }*/
         } catch (Exception e) {
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
@@ -243,16 +256,16 @@ public class GenericDao {
     }
 
     protected List<Object> findAll(Class classe) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        //session = HibernateUtil.getSessionFactory().openSession();
         List<Object> lista = null;
         try {
-            try {
-                lista = session.createCriteria(classe).addOrder(Order.asc("id")).list();
-            } finally {
+            //try {
+                lista = HibernateUtil.getSession().createCriteria(classe).addOrder(Order.asc("id")).list();
+            /*} finally {
                 if (session.isOpen()) {
                     session.close();
                 }
-            }
+            }*/
         } catch (Exception e) {
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
@@ -267,17 +280,17 @@ public class GenericDao {
      * vazia (size = 0)
      */
     protected List<Object> search(String classe, String campo, String valor) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        //session = HibernateUtil.getSessionFactory().openSession();
         List<Object> lista = null;
         try {
-            try {
+            //try {
                 String hql = "from " + classe + " where " + campo + " like '%" + valor + "%' order by " + campo;
-                lista = session.createQuery(hql).list();
-            } finally {
+                lista = HibernateUtil.getSession().createQuery(hql).list();
+            /*} finally {
                 if (session.isOpen()) {
                     session.close();
                 }
-            }
+            }*/
         } catch (Exception e) {
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
@@ -287,49 +300,53 @@ public class GenericDao {
     }
 
     protected List<Object> query(Class classe, String sqlQuery) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        //session = HibernateUtil.getSessionFactory().openSession();
         List lista = null;
         try {
-            Query queryResult = session.createSQLQuery(sqlQuery).addEntity(classe);
+            Query queryResult = HibernateUtil.getSession().createSQLQuery(sqlQuery).addEntity(classe);
             lista = queryResult.list();
         } catch (Exception e) {
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
             e.printStackTrace();
-        } finally {
+        } /*finally {
             if (session.isOpen()) {
                 session.close();
             }
-        }
+        }*/
         return lista;
     }
 
     protected Object queryUnique(Class classe, String sqlQuery) {
-        session = HibernateUtil.getSessionFactory().openSession();
+        //session = HibernateUtil.getSessionFactory().openSession();
         Object resultado = null;
         try {
-            Query queryResult = session.createSQLQuery(sqlQuery).addEntity(classe);
+            Query queryResult = HibernateUtil.getSession().createSQLQuery(sqlQuery).addEntity(classe);
             resultado = queryResult.uniqueResult();
         } catch (Exception e) {
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
             e.printStackTrace();
-        } finally {
+        } /*finally {
             if (session.isOpen()) {
                 session.close();
             }
-        }
+        }*/
         return resultado;
     }
 
      protected void queryNoResult(String sqlQuery) {
-        session = HibernateUtil.getSessionFactory().openSession();
-        transaction = session.beginTransaction();
+        //session = HibernateUtil.getSessionFactory().openSession();
+        //transaction = session.beginTransaction();
         try {
-            session.createSQLQuery(sqlQuery).executeUpdate();
-            transaction.commit();
+        	HibernateUtil.beginTransaction();
+        	HibernateUtil.getSession().createSQLQuery(sqlQuery).executeUpdate();
+        	HibernateUtil.commitTransaction();
+            //session.createSQLQuery(sqlQuery).executeUpdate();
+            //transaction.commit();
         } catch (Exception e) {
-            transaction.rollback();
+        	HibernateUtil.rollbackTransaction();
+            //transaction.rollback();
             errorMessage = e.getMessage();
             stackTrace = e.getStackTrace().toString();
             e.printStackTrace();
