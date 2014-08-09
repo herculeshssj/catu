@@ -1,6 +1,6 @@
 <%--
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -51,6 +51,8 @@
  
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+<%@taglib prefix="rich" uri="http://richfaces.org/rich" %>
+<%@ taglib prefix="a4j" uri="http://richfaces.org/a4j" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -74,40 +76,41 @@
                 <h:commandButton value="Pesquisar" action="#{SetorMB.pesquisar}"  style="padding: 3px 10px;"/>
                 <br/><br/>
                 
-                <h:dataTable id="tableSetors" value="#{SetorMB.listaSetors}" var="item" width="100%" border="1" style="text-align:center" styleClass="jsflist">
+                <rich:dataTable id="tableSetors" value="#{SetorMB.listaSetors}" var="item" rows="15" width="100%" border="1" style="text-align:center" styleClass="jsflist">
                     <f:facet name="header">
                         <h:outputText value="Setores cadastrados"/>
                     </f:facet>                    
-                     <h:column>
+                     <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Setor"/>
                         </f:facet>
                          <h:outputText value="#{item.descricao}"/>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Responsável"/>
                         </f:facet>
                          <h:outputText value="#{item.responsavel}"/>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Editar"/>
                         </f:facet>
                         <h:commandLink value="Editar" action="#{SetorMB.editar}">
                             <f:setPropertyActionListener target="#{SetorMB.idSetor}" value="#{item.id}"/>
                         </h:commandLink>                        
-                    </h:column>
+                    </rich:column>
 
-                    <h:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Excluir"/>
                         </f:facet>
                         <h:commandLink value="Excluir" action="#{SetorMB.excluir}" onclick="javascript:return(confirm('Deseja apagar este registro?'))">
                             <f:setPropertyActionListener target="#{SetorMB.idSetor}" value="#{item.id}"/>
                         </h:commandLink>
-                    </h:column>
-                </h:dataTable>
+                    </rich:column>
+                </rich:dataTable>
+                <rich:datascroller id="dsSetors" for="tableSetors"></rich:datascroller>
                    <br/>
                 <strong><h:commandLink value="Novo setor" action="#{SetorMB.cadastrar}"/></strong>
             </h:form>

@@ -1,6 +1,6 @@
 <%--
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -51,6 +51,8 @@
  
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+<%@taglib prefix="rich" uri="http://richfaces.org/rich" %>
+<%@ taglib prefix="a4j" uri="http://richfaces.org/a4j" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -67,47 +69,45 @@
                 <br/><br/>
                 <h:messages/>
 
-                <h:dataTable id="tableLogins" value="#{LoginMB.listaLogin}" var="item" width="100%" border="1" style="text-align:center" styleClass="jsflist">
+                <rich:dataTable id="tableLogins" value="#{LoginMB.listaLogin}" var="item" rows="15" width="100%" border="1" style="text-align:center" styleClass="jsflist">
                     <f:facet name="header">
                         <h:outputText value="Logins cadastrados"/>
                     </f:facet>                  
-                    <h:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Nome do usuário"/>
                         </f:facet>
                         <h:outputText value="#{item.nomeUsuario}"/>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Login do usuário"/>
                         </f:facet>
                         <h:outputText value="#{item.usuarioLogin}"/>
-                    </h:column>
-
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Perfil"/>
                         </f:facet>
                         <h:outputText value="#{item.perfil}"/>
-                    </h:column>
-                     <h:column>
+                    </rich:column>
+                     <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Info"/>
                         </f:facet>
                         <h:commandLink value="Modificar" action="#{LoginMB.editarPerfil}">
                             <f:setPropertyActionListener target="#{LoginMB.idUsuario}" value="#{item.id}"/>
                         </h:commandLink>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Senha"/>
                         </f:facet>
                         <h:commandLink value="Alterar" action="#{LoginMB.editar}">
                             <f:setPropertyActionListener target="#{LoginMB.idUsuario}" value="#{item.id}"/>
                         </h:commandLink>
-                    </h:column>
-
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Login"/>
                         </f:facet>
@@ -117,8 +117,9 @@
                         <h:commandLink value="Desativar" action="#{LoginMB.ativarDesativar}" rendered="#{item.ativo}" onclick="javascript:return(confirm('Deseja desativar este login?'))">
                             <f:setPropertyActionListener target="#{LoginMB.idUsuario}" value="#{item.id}"/>
                         </h:commandLink>
-                    </h:column>
-                </h:dataTable>
+                    </rich:column>
+                </rich:dataTable>
+                <rich:datascroller id="dsLogins" for="tableLogins"></rich:datascroller>
                 <br/>
                 <strong><h:commandLink value="Novo login" action="#{LoginMB.cadastrar}"/></strong>
             </h:form>

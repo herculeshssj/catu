@@ -1,6 +1,6 @@
 <%--
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -51,6 +51,8 @@
 
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+<%@taglib prefix="rich" uri="http://richfaces.org/rich" %>
+<%@ taglib prefix="a4j" uri="http://richfaces.org/a4j" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -80,39 +82,39 @@
 				<br />
 				<br />
 
-				<h:dataTable id="tableMaquinas"
-					value="#{MaquinaMB.listaMaquinas}" var="item" width="100%"
+				<rich:dataTable id="tableMaquinas"
+					value="#{MaquinaMB.listaMaquinas}" var="item" rows="15" width="100%"
 					border="1" style="text-align:center" styleClass="jsflist">
 					<f:facet name="header">
 						<h:outputText value="Máquinas cadastrados" />
 					</f:facet>
-					<h:column>
+					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Patrimônio" />
 						</f:facet>
 						<h:outputText value="#{item.numPatrimonial}" />
-					</h:column>
-					<h:column>
+					</rich:column>
+					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Cliente" />
 						</f:facet>
 						<h:outputText value="#{item.cliente.nomeCliente}" />						
-					</h:column>
-					<h:column>
+					</rich:column>
+					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Setor" />
 						</f:facet>
 						<h:outputText value="#{item.setor.descricao}" />
-					</h:column>
-					<h:column>
+					</rich:column>
+					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Em uso" />
 						</f:facet>
 						<h:outputText value="#{item.emUso}">
 							<f:converter converterId="simnaoconverter" />
 						</h:outputText>
-					</h:column>
-					<h:column>
+					</rich:column>
+					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Editar" />
 						</f:facet>
@@ -120,8 +122,9 @@
 							<f:setPropertyActionListener target="#{MaquinaMB.idMaquina}"
 								value="#{item.id}" />
 						</h:commandLink>
-					</h:column>					
-				</h:dataTable>
+					</rich:column>					
+				</rich:dataTable>
+				<rich:datascroller id="dsMaquinas" for="tableMaquinas"></rich:datascroller>
 				<br />
 				<strong><h:commandLink value="Nova máquina"
 						action="#{MaquinaMB.cadastrar}" />

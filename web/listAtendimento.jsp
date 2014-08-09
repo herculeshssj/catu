@@ -1,6 +1,6 @@
 <%--
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -52,6 +52,7 @@
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
 <%@taglib prefix="rich" uri="http://richfaces.org/rich" %>
+<%@ taglib prefix="a4j" uri="http://richfaces.org/a4j" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -82,54 +83,59 @@
                 <h:commandButton value="Pesquisar" action="#{AtendimentoMB.pesquisarAtendimento}" style="padding: 3px 10px;"/>
                 <br/><br/>
 
-                <h:dataTable id="listAtendimentos" width="100%" value="#{AtendimentoMB.listaAtendimentos}" var="item" style="text-align:center" styleClass="jsflist">
-                    <h:column>
+                <rich:dataTable id="listAtendimentos" width="100%" value="#{AtendimentoMB.listaAtendimentos}" var="item" rows="15" style="text-align:center" styleClass="jsflist">
+                <f:facet name="header">
+                        <h:outputText value="Atendimentos registrados"/>
+                    </f:facet>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Cód. Atend." />
                         </f:facet>
                         <h:outputText value="#{item.id}"/>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Cliente" />
                         </f:facet>
                         <h:outputText value="#{item.idCliente.nomeCliente}"/>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Data de abertura" />
                         </f:facet>
                         <h:outputText value="#{item.dataAbertura}">
                             <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
                         </h:outputText>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Status do atendimento" />
                         </f:facet>
                         <h:outputText value="#{item.idStatus.descricao}" />
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Prioridade" />
                         </f:facet>
                         <h:outputText value="#{item.prioridade}" />
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Operador" />
                         </f:facet>
                         <h:outputText value="#{item.idOperador.nomeUsuario}" />
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Detalhes" />
                         </f:facet>
                         <h:commandLink value="Ver" action="#{AtendimentoMB.editar}">
                             <f:setPropertyActionListener target="#{AtendimentoMB.idAtendimento}" value="#{item.id}"/>
                         </h:commandLink>
-                    </h:column>
-                </h:dataTable>
+                    </rich:column>
+                </rich:dataTable>
+
+				<rich:datascroller id="dsAtendimentos" for="listAtendimentos"></rich:datascroller>
 
             </h:form>
             

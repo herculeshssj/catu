@@ -1,6 +1,6 @@
 <%--
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -51,6 +51,8 @@
 
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+<%@taglib prefix="rich" uri="http://richfaces.org/rich" %>
+<%@ taglib prefix="a4j" uri="http://richfaces.org/a4j" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -80,33 +82,33 @@
 				<br />
 				<br />
 
-				<h:dataTable id="tableSoftwares"
-					value="#{SoftwareMB.listaSoftwares}" var="item" width="100%"
+				<rich:dataTable id="tableSoftwares"
+					value="#{SoftwareMB.listaSoftwares}" var="item" rows="15" width="100%"
 					border="1" style="text-align:center" styleClass="jsflist">
 					<f:facet name="header">
 						<h:outputText value="Softwares cadastrados" />
 					</f:facet>
-					<h:column>
+					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Software" />
 						</f:facet>
 						<h:outputText value="#{item.nome}" />
-					</h:column>
-					<h:column>
+					</rich:column>
+					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Descrição" />
 						</f:facet>
 						<h:outputText value="#{item.descricao}" />
-					</h:column>
-					<h:column>
+					</rich:column>
+					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Em uso" />
 						</f:facet>
 						<h:outputText value="#{item.emUso}">
 							<f:converter converterId="simnaoconverter" />
 						</h:outputText>
-					</h:column>
-					<h:column>
+					</rich:column>
+					<rich:column>
 						<f:facet name="header">
 							<h:outputText value="Editar" />
 						</f:facet>
@@ -114,8 +116,9 @@
 							<f:setPropertyActionListener target="#{SoftwareMB.idSoftware}"
 								value="#{item.id}" />
 						</h:commandLink>
-					</h:column>
-				</h:dataTable>
+					</rich:column>
+				</rich:dataTable>
+				<rich:datascroller id="dsSoftwares" for="tableSoftwares"></rich:datascroller>
 				<br />
 				<strong><h:commandLink value="Novo software"
 						action="#{SoftwareMB.cadastrar}" />

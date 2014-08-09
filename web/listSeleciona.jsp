@@ -1,6 +1,6 @@
 <%--
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -51,6 +51,8 @@
  
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+<%@taglib prefix="rich" uri="http://richfaces.org/rich" %>
+<%@ taglib prefix="a4j" uri="http://richfaces.org/a4j" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -72,43 +74,44 @@
                 <h:commandButton value="Pesquisar" action="#{AtendimentoMB.pesquisarCliente}"  style="padding: 3px 10px;"/>
                 <br/><br/>
 
-                <h:dataTable id="tableClientes" value="#{AtendimentoMB.listaClientes}" var="item" width="100%" border="1" style="text-align:center" styleClass="jsflist">
+                <rich:dataTable id="tableClientes" value="#{AtendimentoMB.listaClientes}" var="item" rows="15" width="100%" border="1" style="text-align:center" styleClass="jsflist">
                     <f:facet name="header">
                         <h:outputText value="Clientes cadastrados"/>
                     </f:facet>                    
-                    <h:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Cliente"/>
                         </f:facet>
                         <h:outputText value="#{item.nomeCliente}"/>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Setor"/>
                         </f:facet>
                         <h:outputText value="#{item.idSetor.descricao}"/>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Telefone"/>
                         </f:facet>
                         <h:outputText value="#{item.telefone}"/>
-                    </h:column>                    
-                    <h:column>
+                    </rich:column>                    
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="E-Mail"/>
                         </f:facet>
                         <h:outputText value="#{item.email}"/>
-                    </h:column>
-                    <h:column>
+                    </rich:column>
+                    <rich:column>
                         <f:facet name="header">
                             <h:outputText value="Atendimento"/>
                         </f:facet>
                         <h:commandLink value="Novo" action="#{AtendimentoMB.novoAtendimento}">
                             <f:setPropertyActionListener target="#{AtendimentoMB.idCliente}" value="#{item.id}"/>
                         </h:commandLink>                        
-                    </h:column>
-                </h:dataTable>
+                    </rich:column>
+                </rich:dataTable>
+                <rich:datascroller id="dsClientes" for="tableClientes"></rich:datascroller>
                 <br/>                
             </h:form>
             
