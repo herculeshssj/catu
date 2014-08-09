@@ -48,9 +48,14 @@
 
 package br.com.hslife.catu.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
+
+import br.com.hslife.catu.db.HibernateUtil;
 import br.com.hslife.catu.model.Atendimento;
 import br.com.hslife.catu.model.Cliente;
 import br.com.hslife.catu.model.Status;
@@ -139,6 +144,29 @@ public class AtendimentoDao extends GenericDao implements InterfaceDao<Atendimen
         String sqlQuery = "select * from Atendimento where idStatus = " + valor;
         lista = query(Atendimento.class, sqlQuery);
         return lista;
+    }
+    
+    @SuppressWarnings("unchecked")
+	public List<Atendimento> listaTodosPorCodigoDataAberturaEStatus(Long codAtend, Date dataAbertura, Status status) {
+    	List<Atendimento> resultado = new ArrayList<Atendimento>();
+    	try {
+	    	Criteria criteria = HibernateUtil.getSession().createCriteria(Atendimento.class);
+	    	if (codAtend != null) {
+	    		criteria.add(Restrictions.eq("id", codAtend));
+	    	}
+	    	if (dataAbertura != null) {
+	    		criteria.add(Restrictions.ge("dataAbertura", dataAbertura));
+	    	}
+	    	if (status != null) {
+	    		criteria.add(Restrictions.eq("idStatus.id", status.getId()));
+	    	}
+	    	resultado = criteria.list();
+    	} catch (Exception e) {
+    		errorMessage = e.getMessage();
+            stackTrace = e.getStackTrace().toString();
+            e.printStackTrace();
+    	}
+    	return resultado;
     }
 
 }

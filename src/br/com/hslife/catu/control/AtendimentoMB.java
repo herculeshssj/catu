@@ -85,6 +85,7 @@ public class AtendimentoMB {
     private Atendimento atendimento;
     private Cliente cliente;
     private AtendimentoDao dao;
+    private StatusDao statusDAO;
     private String busca;
     private String codAtend;
     private Long idAtendimento;
@@ -106,6 +107,7 @@ public class AtendimentoMB {
     public AtendimentoMB() {
         atendimento = new Atendimento();
         dao = new AtendimentoDao();
+        statusDAO = new StatusDao();
         listaAtendimentos = new ArrayList<Atendimento>();
         listaClientes = new ArrayList<Cliente>();
         ClienteDao daoC = new ClienteDao();
@@ -289,21 +291,18 @@ public class AtendimentoMB {
 
     public void pesquisarAtendimento() {
         FacesContext contexto = FacesContext.getCurrentInstance();
-        setMsg("Registros carregados com sucesso!");
-        if (getCodAtend().length()==0 && getIdStatus() == 0 && getDataAbertura() == null) {
-            setMsg("Escolha uma das três opções de pesquisa!");
-        } else if (codAtend.length()!=0) {
-            setListaAtendimentos((List<Atendimento>) getDao().listarTodos(getBusca()));
-        } else if (getIdStatus() != 0) {
-            setListaAtendimentos((List<Atendimento>) getDao().listarTodos(getIdStatus()));
-        } else if (getDataAbertura() != null) {
-            setListaAtendimentos((List<Atendimento>) getDao().listarTodos(getDataAbertura()));
-        } else if (getIdStatus() != 0 && getDataAbertura() != null) {
-            setListaAtendimentos((List<Atendimento>) getDao().listarTodos(getDataAbertura(), getIdStatus()));
-        }
+        
+        setListaAtendimentos(getDao().listaTodosPorCodigoDataAberturaEStatus(
+        		codAtend == null || codAtend.isEmpty() ? null : Long.valueOf(codAtend),
+        		dataAbertura, 
+        		statusDAO.buscar(getIdStatus())));
+        
         if (getDao().getErrorMessage() != null) {
             setMsg("Erro ao procurar: " + getDao().getErrorMessage());
+        } else {
+        	setMsg("Registros carregados com sucesso!");
         }
+        
         FacesMessage mensagem = new FacesMessage(getMsg());
         contexto.addMessage("lstAtendimento", mensagem);
     }

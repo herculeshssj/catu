@@ -73,7 +73,7 @@
                 &nbsp;                
                 Status:
                 <h:selectOneMenu value="#{AtendimentoMB.idStatus}">
-                    <f:selectItem itemLabel="Selecione" itemValue="0"/>
+                    <f:selectItem itemLabel="Todos" itemValue="0"/>
                     <f:selectItems value="#{AtendimentoMB.listaStatus}"/>
                 </h:selectOneMenu>
                 &nbsp;
