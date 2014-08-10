@@ -141,19 +141,13 @@
 
                     </h:panelGrid>
                     
-                    <rich:simpleTogglePanel switchType="client" opened="false" label="Histórico de registros do atendimento">
+                    <rich:simpleTogglePanel switchType="client" opened="false" label="Histórico de registros do atendimento" rendered="#{!AtendimentoMB.isNovo }">
 						<h:panelGrid columns="2" rendered="#{!AtendimentoMB.atendimento.idStatus.encerra }">
 							<h:inputTextarea value="#{AtendimentoMB.historico.descricao }" cols="80" rows="2" />
 							<h:commandButton value="Registrar" action="#{AtendimentoMB.registrarHistorico }" style="padding: 3px 10px;"></h:commandButton>
 						</h:panelGrid>
 						<br/>
 						<rich:dataTable width="100%" value="#{AtendimentoMB.atendimento.historico }" var="item" styleClass="jsflist">
-							<rich:column>
-								<f:facet name="header">
-									<h:outputText value="ID" />
-								</f:facet>
-								<h:outputText value="#{item.id }" />
-							</rich:column>
 							<rich:column>
 								<f:facet name="header">
 									<h:outputText value="Data" />

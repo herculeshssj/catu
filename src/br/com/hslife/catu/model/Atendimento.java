@@ -52,6 +52,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -61,9 +62,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name="Atendimento")
@@ -122,7 +127,9 @@ public class Atendimento implements Serializable {
     @JoinColumn(name="idOperador")
     private Login idOperador; // chave estrangeira indicando o operador que abriu o atendimento
     
-    @OneToMany(mappedBy="atendimento", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="atendimento", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+    @Fetch(FetchMode.SELECT)
+    @OrderBy("data")
     private List<HistoricoAtendimento> historico;
 
     public Atendimento(){        

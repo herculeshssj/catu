@@ -385,7 +385,11 @@ public class AtendimentoMB {
         HttpSession sessao = (HttpSession) contexto.getExternalContext().getSession(false);
         historico.setLogin((Login) sessao.getAttribute("usuarioLogado"));
         
-        getDao().salvarHistorico(historico);
+        if (atendimento.getHistorico() == null) {
+        	atendimento.setHistorico(new ArrayList<HistoricoAtendimento>());
+        }
+        atendimento.getHistorico().add(historico);
+        getDao().alterar(atendimento);
     	
         if (getDao().getErrorMessage() != null) {
             setMsg("Erro ao salvar: " + getDao().getErrorMessage());
