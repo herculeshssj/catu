@@ -52,6 +52,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,6 +61,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -131,6 +133,11 @@ public class Atendimento implements Serializable {
     @Fetch(FetchMode.SELECT)
     @OrderBy("data")
     private List<HistoricoAtendimento> historico;
+    
+    @Lob
+	@Basic(fetch = FetchType.EAGER)
+	@Column(length=1048576)
+	private byte[] arquivo;
 
     public Atendimento(){        
        idStatus = new Status();
@@ -328,5 +335,13 @@ public class Atendimento implements Serializable {
 
 	public void setHistorico(List<HistoricoAtendimento> historico) {
 		this.historico = historico;
+	}
+
+	public byte[] getArquivo() {
+		return arquivo;
+	}
+
+	public void setArquivo(byte[] arquivo) {
+		this.arquivo = arquivo;
 	}
 }

@@ -61,3 +61,6 @@ create table HistoricoAtendimento (
 
 alter table HistoricoAtendimento  add constraint fk_atendimento_historicoatendimento foreign key(idAtendimento) references Atendimento(id);
 alter table HistoricoAtendimento  add constraint fk_login_historicoatendimento foreign key(idLogin) references Login(id);
+
+-- Upload de arquivo
+alter table Atendimento add column arquivo mediumblob;

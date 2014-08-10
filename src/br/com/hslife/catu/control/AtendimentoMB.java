@@ -65,6 +65,10 @@ import javax.servlet.http.HttpSession;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+
+import org.richfaces.event.UploadEvent;
+import org.richfaces.model.UploadItem;
+
 import br.com.hslife.catu.dao.AtendimentoDao;
 import br.com.hslife.catu.dao.ClienteDao;
 import br.com.hslife.catu.dao.StatusDao;
@@ -404,6 +408,34 @@ public class AtendimentoMB {
         
         return this.editar();
     }
+    
+    public void carregaArquivo(UploadEvent event) throws Exception {
+		UploadItem item = event.getUploadItem();
+		atendimento.setArquivo(item.getData());
+	}
+    
+    public void baixarArquivo() {
+    	FacesContext contexto = FacesContext.getCurrentInstance();
+    	
+    	if (atendimento.getArquivo() == null) {
+    		setMsg("Nenhum arquivo anexado!");
+    	} else {
+    		HttpServletResponse response = (HttpServletResponse) contexto.getExternalContext().getResponse();
+			try {			
+				response.setContentType("application/pdf");
+				response.setHeader("Content-Disposition","attachment; filename=anexo.pdf");
+				response.setContentLength(atendimento.getArquivo().length);
+				ServletOutputStream output = response.getOutputStream();
+				output.write(atendimento.getArquivo(), 0, atendimento.getArquivo().length);
+				FacesContext.getCurrentInstance().responseComplete();
+			} catch (Exception e) {
+				setMsg(e.getMessage());
+			}
+    	}
+    	
+    	FacesMessage mensagem = new FacesMessage(getMsg());
+        contexto.addMessage("frmAtendimento", mensagem);
+	}
 
     /**
      * @return the atendimento

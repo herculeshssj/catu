@@ -132,6 +132,12 @@
 
                         <h:inputHidden value="#{AtendimentoMB.idCliente}"/>
                         <h:inputHidden />
+                        
+                        <h:outputText rendered="#{AtendimentoMB.isNovo }"/>
+                        <h:outputText rendered="#{!AtendimentoMB.isNovo }"/>
+                        <rich:fileUpload id="txtUploadArquivo" listWidth="400" listHeight="100" fileUploadListener="#{AtendimentoMB.carregaArquivo }" maxFilesQuantity="1" acceptedTypes="pdf" rendered="#{AtendimentoMB.isNovo }"/>
+                        <h:commandLink value="Baixar arquivo" action="#{AtendimentoMB.baixarArquivo }" rendered="#{!AtendimentoMB.isNovo or AtendimentoMB.atendimento.arquivo != null}"/>
+						
                         <h:commandButton value="Registrar chamado" action="#{AtendimentoMB.registrarChamado}" style="padding: 3px 10px;" rendered="#{AtendimentoMB.isNovo}"
                                          disabled="#{AtendimentoMB.atendimento.idStatus.encerra}"/>
                         <h:commandButton value="Salvar alterações" action="#{AtendimentoMB.salvarAlteracoes}" style="padding: 3px 10px;" rendered="#{!AtendimentoMB.isNovo}"
