@@ -1,6 +1,6 @@
 /***
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -50,13 +50,17 @@ package br.com.hslife.catu.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -65,7 +69,12 @@ import javax.persistence.TemporalType;
 @Table(name="Atendimento")
 public class Atendimento implements Serializable {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 438948233026870254L;
+
+	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id; // chave primária da tabela
 
@@ -112,6 +121,9 @@ public class Atendimento implements Serializable {
     @ManyToOne
     @JoinColumn(name="idOperador")
     private Login idOperador; // chave estrangeira indicando o operador que abriu o atendimento
+    
+    @OneToMany(mappedBy="atendimento", fetch=FetchType.EAGER)
+    private List<HistoricoAtendimento> historico;
 
     public Atendimento(){        
        idStatus = new Status();
@@ -303,4 +315,11 @@ public class Atendimento implements Serializable {
 		this.prioridade = prioridade;
 	}
 
+	public List<HistoricoAtendimento> getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(List<HistoricoAtendimento> historico) {
+		this.historico = historico;
+	}
 }

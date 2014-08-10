@@ -121,8 +121,9 @@ public class GenericDao {
         //transaction = session.beginTransaction();
         try {
         	HibernateUtil.beginTransaction();
-        	HibernateUtil.getSession().save(obj);
+        	HibernateUtil.getSession().save(obj);        	
         	HibernateUtil.commitTransaction();
+        	HibernateUtil.getSession().flush();
         	// session.save(obj);
             //transaction.commit();
         } catch (Exception e) {

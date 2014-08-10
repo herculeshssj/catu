@@ -58,6 +58,7 @@ import org.hibernate.criterion.Restrictions;
 import br.com.hslife.catu.db.HibernateUtil;
 import br.com.hslife.catu.model.Atendimento;
 import br.com.hslife.catu.model.Cliente;
+import br.com.hslife.catu.model.HistoricoAtendimento;
 import br.com.hslife.catu.model.Status;
 import br.com.hslife.catu.model.Tipo;
 
@@ -82,6 +83,10 @@ public class AtendimentoDao extends GenericDao implements InterfaceDao<Atendimen
         delete(obj);
     }
 
+    public void salvarHistorico(HistoricoAtendimento obj) {
+    	save(obj);
+    }
+    
     @Override
     public Atendimento buscar(long id) {
         return (Atendimento) find(Atendimento.class, id);

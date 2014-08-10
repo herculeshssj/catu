@@ -1,6 +1,6 @@
 <%--
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -51,6 +51,8 @@
  
 <%@taglib prefix="f" uri="http://java.sun.com/jsf/core"%>
 <%@taglib prefix="h" uri="http://java.sun.com/jsf/html"%>
+<%@taglib prefix="rich" uri="http://richfaces.org/rich" %>
+<%@ taglib prefix="a4j" uri="http://richfaces.org/a4j" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -138,6 +140,42 @@
                         <h:commandButton rendered="#{!AtendimentoMB.isNovo}" value="Imprimir OS" action="#{AtendimentoMB.imprimirOS}" style="padding: 3px 10px;"/>&nbsp;
 
                     </h:panelGrid>
+                    
+                    <rich:simpleTogglePanel switchType="client" opened="false" label="Histórico de registros do atendimento">
+						<h:panelGrid columns="2" rendered="#{!AtendimentoMB.atendimento.idStatus.encerra }">
+							<h:inputTextarea value="#{AtendimentoMB.historico.descricao }" cols="80" rows="2" />
+							<h:commandButton value="Registrar" action="#{AtendimentoMB.registrarHistorico }" style="padding: 3px 10px;"></h:commandButton>
+						</h:panelGrid>
+						<br/>
+						<rich:dataTable width="100%" value="#{AtendimentoMB.atendimento.historico }" var="item" styleClass="jsflist">
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="ID" />
+								</f:facet>
+								<h:outputText value="#{item.id }" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Data" />
+								</f:facet>
+								<h:outputText value="#{item.data }">
+									<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+								</h:outputText>
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Descrição" />
+								</f:facet>
+								<h:outputText value="#{item.descricao }" />
+							</rich:column>
+							<rich:column>
+								<f:facet name="header">
+									<h:outputText value="Operador" />
+								</f:facet>
+								<h:outputText value="#{item.login.nomeUsuario }" />
+							</rich:column>
+						</rich:dataTable>
+					</rich:simpleTogglePanel>
 
                 </h:form>
                 <br/>

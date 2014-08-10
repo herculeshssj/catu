@@ -3,7 +3,7 @@
 
 <!-- 
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -97,6 +97,7 @@
     <mapping class="br.com.hslife.catu.model.Atendimento"/>
     <mapping class="br.com.hslife.catu.model.Maquina"/>
     <mapping class="br.com.hslife.catu.model.Software"/>
+    <mapping class="br.com.hslife.catu.model.HistoricoAtendimento"/>
     <!-- NÃO ALTERE ESTAS LINHAS -->
   </session-factory>
 </hibernate-configuration>

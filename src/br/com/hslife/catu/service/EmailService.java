@@ -1,6 +1,6 @@
 /***
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -93,11 +93,11 @@ public class EmailService {
         email.setFrom(emailRemetente, nomeRementente); // remetente
         email.setSubject(assunto); // assunto do e-mail
         email.setMsg(mensagem.toString()); //conteudo do e-mail
-        email.setAuthentication("realimoveis@hslife.com.br", "real123");
+        email.setAuthentication("nao-responde@hslife.com.br", "n0r3ply1@3");
         email.setCharset("UTF8");
-        //email.setSmtpPort(465);
-        //email.setSSL(true);
-        //email.setTLS(true);
+        email.setSmtpPort(465);
+        email.setSSL(true);
+        email.setTLS(true);
         email.send();
     }
 

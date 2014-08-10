@@ -1,6 +1,6 @@
 /***
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010, 2011, 2014 Hércules S. S. José
 
 
 
@@ -71,6 +71,7 @@ import br.com.hslife.catu.dao.StatusDao;
 import br.com.hslife.catu.dao.TipoDao;
 import br.com.hslife.catu.model.Atendimento;
 import br.com.hslife.catu.model.Cliente;
+import br.com.hslife.catu.model.HistoricoAtendimento;
 import br.com.hslife.catu.model.Login;
 import br.com.hslife.catu.model.Status;
 import br.com.hslife.catu.model.Tipo;
@@ -83,6 +84,7 @@ public class AtendimentoMB {
 	private static final int EMAIL_EDICAO = 2;
 
     private Atendimento atendimento;
+    private HistoricoAtendimento historico;
     private Cliente cliente;
     private AtendimentoDao dao;
     private StatusDao statusDAO;
@@ -106,6 +108,7 @@ public class AtendimentoMB {
 
     public AtendimentoMB() {
         atendimento = new Atendimento();
+        historico = new HistoricoAtendimento();
         dao = new AtendimentoDao();
         statusDAO = new StatusDao();
         listaAtendimentos = new ArrayList<Atendimento>();
@@ -369,13 +372,34 @@ public class AtendimentoMB {
     			
     		// Envia o e-mail
     		EmailService emailService = new EmailService();
-    		emailService.enviaEmailSimples("nao-responda", "noreply@hslife.com.br", atendimento.getIdCliente().getNomeCliente(), atendimento.getIdCliente().getEmail(), "[CATU] - Atendimento nº " + atendimento.getId(), textoEmail);    				
+    		emailService.enviaEmailSimples("nao-responda", "nao-responde@hslife.com.br", atendimento.getIdCliente().getNomeCliente(), atendimento.getIdCliente().getEmail(), "[CATU] - Atendimento nº " + atendimento.getId(), textoEmail);    				
     		
     	} catch (Exception e) {
     		e.printStackTrace();
     	}
     }
     
+    public String registrarHistorico() {
+    	FacesContext contexto = FacesContext.getCurrentInstance();
+        historico.setAtendimento(atendimento);
+        HttpSession sessao = (HttpSession) contexto.getExternalContext().getSession(false);
+        historico.setLogin((Login) sessao.getAttribute("usuarioLogado"));
+        
+        getDao().salvarHistorico(historico);
+    	
+        if (getDao().getErrorMessage() != null) {
+            setMsg("Erro ao salvar: " + getDao().getErrorMessage());
+        } else {
+        	setMsg("Histórico registrado com sucesso!");
+        	historico = new HistoricoAtendimento();
+        	 
+        }
+        
+        FacesMessage mensagem = new FacesMessage(getMsg());
+        contexto.addMessage("frmAtendimento", mensagem);
+        
+        return this.editar();
+    }
 
     /**
      * @return the atendimento
@@ -601,4 +625,11 @@ public class AtendimentoMB {
         this.dataAbertura = dataAbertura;
     }
 
+	public HistoricoAtendimento getHistorico() {
+		return historico;
+	}
+
+	public void setHistorico(HistoricoAtendimento historico) {
+		this.historico = historico;
+	}
 }
