@@ -79,6 +79,8 @@
                 &nbsp;
                 <h:commandButton value="Pesquisar"
 					action="#{MaquinaMB.pesquisar}" style="padding: 3px 10px;" />
+				&nbsp;
+				<h:commandLink value="Gerar inventário" action="#{MaquinaMB.gerarInventario}" />
 				<br />
 				<br />
 

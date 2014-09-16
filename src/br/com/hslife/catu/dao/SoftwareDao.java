@@ -48,8 +48,10 @@
 
 package br.com.hslife.catu.dao;
 
+import java.sql.Connection;
 import java.util.List;
 
+import br.com.hslife.catu.db.HibernateUtil;
 import br.com.hslife.catu.model.Software;
 
 public class SoftwareDao extends GenericDao implements InterfaceDao<Software> {
@@ -106,4 +108,8 @@ public class SoftwareDao extends GenericDao implements InterfaceDao<Software> {
 		return (List)query(Software.class, sqlQuery);
 		
 	}
+    
+    public Connection getConnection() {
+    	return HibernateUtil.getConnection();
+    }
 }

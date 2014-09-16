@@ -49,8 +49,8 @@
 				<text><![CDATA[nº]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="100" y="67" width="81" height="20"/>
-				<textElement>
+				<reportElement x="29" y="67" width="152" height="20"/>
+				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Serviços de TI]]></text>
@@ -67,7 +67,7 @@
 	<pageHeader>
 		<band height="524">
 			<staticText>
-				<reportElement x="321" y="11" width="64" height="14"/>
+				<reportElement x="321" y="11" width="108" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
@@ -81,14 +81,14 @@
 				<text><![CDATA[ENDEREÇO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="176" y="79" width="55" height="14"/>
+				<reportElement x="176" y="79" width="167" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[CIDADE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="426" y="79" width="36" height="14"/>
+				<reportElement x="426" y="79" width="113" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
@@ -102,14 +102,14 @@
 				<text><![CDATA[SETOR / DEPARTAMENTO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="357" y="79" width="28" height="14"/>
+				<reportElement x="357" y="79" width="38" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[UF]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="79" width="56" height="14"/>
+				<reportElement x="2" y="79" width="159" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
@@ -119,42 +119,42 @@
 				<reportElement x="2" y="0" width="539" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="0" y="113" width="144" height="14"/>
+				<reportElement x="0" y="113" width="161" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[TÉCNICO RESPONSÁVEL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="176" y="113" width="68" height="14"/>
+				<reportElement x="176" y="113" width="99" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[INÍCIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="287" y="113" width="56" height="14"/>
+				<reportElement x="287" y="113" width="98" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[TÉRMINO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="401" y="113" width="56" height="14"/>
+				<reportElement x="401" y="113" width="138" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[SERVIÇO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="207" width="161" height="20"/>
+				<reportElement x="0" y="207" width="233" height="20"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[SOLICITAÇÃO DO CLIENTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="417" width="100" height="20"/>
+				<reportElement x="0" y="417" width="161" height="20"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
@@ -171,7 +171,7 @@
 				<reportElement x="0" y="193" width="539" height="1"/>
 			</line>
 			<staticText>
-				<reportElement x="2" y="11" width="111" height="14"/>
+				<reportElement x="2" y="11" width="310" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
@@ -188,7 +188,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{logradouro}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="0" y="93" width="163" height="20"/>
+				<reportElement x="0" y="93" width="161" height="20"/>
 				<textElement/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{bairro}]]></textFieldExpression>
 			</textField>
@@ -239,7 +239,7 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$P{observacao}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="431" y="11" width="64" height="14"/>
+				<reportElement x="431" y="11" width="108" height="14"/>
 				<textElement>
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
@@ -287,15 +287,15 @@
 	<pageFooter>
 		<band height="75" splitType="Stretch">
 			<staticText>
-				<reportElement x="43" y="50" width="149" height="20"/>
-				<textElement>
+				<reportElement x="22" y="49" width="182" height="20"/>
+				<textElement textAlignment="Center">
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[ASSINATURA DO CLIENTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="355" y="50" width="159" height="20"/>
-				<textElement>
+				<reportElement x="332" y="50" width="182" height="20"/>
+				<textElement textAlignment="Center">
 					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
 				</textElement>
 				<text><![CDATA[ASSINATURA DO TÉCNICO]]></text>

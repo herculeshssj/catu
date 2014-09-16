@@ -49,11 +49,20 @@
 package br.com.hslife.catu.control;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 import br.com.hslife.catu.dao.SoftwareDao;
 import br.com.hslife.catu.model.Login;
@@ -162,6 +171,44 @@ public class SoftwareMB {
     		msg = "Erro ao procurar: " + e.getMessage();
     	}        
         FacesMessage mensagem = new FacesMessage(msg);
+        contexto.addMessage("lstSoftware", mensagem);
+    }
+    
+    public void gerarInventario() {
+    	// Obtem o contexto atual da aplicação
+        FacesContext contexto = FacesContext.getCurrentInstance();
+        // Obtém o contexto do servlet
+        ServletContext servletContexto = (ServletContext) contexto.getExternalContext().getContext();
+        // Obtém o caminho do relatório a ser gerado
+        String caminhoRelOS = servletContexto.getRealPath("/relatorio/software.jasper");
+        
+        // Obtem a respossa da requisição
+        HttpServletResponse resposta = (HttpServletResponse) contexto.getExternalContext().getResponse();
+
+        // Map para passar para o relatório
+        Map<String, Object> parametros = new HashMap<String, Object>();       
+
+
+        // Chama o método do JasperReport para preencher o relatório
+        try {
+            JasperPrint impressao = JasperFillManager.fillReport(caminhoRelOS, parametros, dao.getConnection());
+            byte[] dados = JasperExportManager.exportReportToPdf(impressao);
+
+            // Complementa a resposta para exibir o relatório gerado
+            resposta.setHeader("Content-Disposition", "attachment; filename=\"software.pdf\";");
+            resposta.setContentLength(dados.length);
+            ServletOutputStream saida = resposta.getOutputStream();
+            saida.write(dados, 0, dados.length);
+            contexto.responseComplete();
+            // Mensagem de sucesso
+            setMsg("Inventário gerado com sucesso!");
+        } catch (Exception e) {
+            // Mensagem de erro
+            setMsg("Não foi possível gerar o inventário: " + e.getMessage());
+            e.printStackTrace();
+        }
+        // Exibição da mensagem no formulário
+        FacesMessage mensagem = new FacesMessage(getMsg());
         contexto.addMessage("lstSoftware", mensagem);
     }
 

@@ -48,8 +48,10 @@
 
 package br.com.hslife.catu.dao;
 
+import java.sql.Connection;
 import java.util.List;
 
+import br.com.hslife.catu.db.HibernateUtil;
 import br.com.hslife.catu.model.Maquina;
 
 public class MaquinaDao extends GenericDao implements InterfaceDao<Maquina> {
@@ -99,5 +101,9 @@ public class MaquinaDao extends GenericDao implements InterfaceDao<Maquina> {
     @Override
     public List<Maquina> procurar(String campo, Object valor) {
         return (List) search("Maquina", campo, (String)valor);
+    }
+    
+    public Connection getConnection() {
+    	return HibernateUtil.getConnection();
     }
 }

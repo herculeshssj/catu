@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CATU_MAQUINA" pageWidth="842" pageHeight="595" orientation="Landscape" whenNoDataType="BlankPage" columnWidth="786" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28" whenResourceMissingType="Empty">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+m.numPatrimonial,
+c.nomeCliente,
+s.descricao as setor,
+m.emUso
+from Maquina m
+inner join Cliente c on c.id = m.idCliente
+inner join Setor s on s.id = m.idSetor;]]>
+	</queryString>
+	<field name="numPatrimonial" class="java.lang.String"/>
+	<field name="nomeCliente" class="java.lang.String"/>
+	<field name="setor" class="java.lang.String"/>
+	<field name="emUso" class="java.lang.Boolean"/>
+	<title>
+		<band height="122" splitType="Stretch">
+			<staticText>
+				<reportElement x="381" y="37" width="405" height="30"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[INVENTÁRIO - MÁQUINAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="102" width="786" height="17"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Av. Ministro Lafaeyte de Andrade, 1683 - Bl. 3 Apt. 404 - Marco II - Nova Iguaçu - RJ]]></text>
+			</staticText>
+			<image>
+				<reportElement x="29" y="1" width="152" height="66"/>
+				<imageExpression class="java.lang.String"><![CDATA["logotipo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="29" y="67" width="152" height="20"/>
+				<textElement textAlignment="Right">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Serviços de TI]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="119" width="786" height="1"/>
+			</line>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="17">
+			<staticText>
+				<reportElement x="730" y="2" width="56" height="12"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Em uso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="2" width="108" height="12"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Nº Patrimonial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="108" y="2" width="411" height="12"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="519" y="2" width="211" height="12"/>
+				<textElement textAlignment="Center">
+					<font isBold="true" pdfFontName="Helvetica-Bold" isPdfEmbedded="true"/>
+				</textElement>
+				<text><![CDATA[Setor]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16">
+			<textField>
+				<reportElement x="730" y="2" width="56" height="12"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{emUso} == true ? "Sim" : "Não"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="2" width="108" height="12"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{numPatrimonial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="108" y="2" width="411" height="12"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomeCliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="519" y="2" width="211" height="12"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{setor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
