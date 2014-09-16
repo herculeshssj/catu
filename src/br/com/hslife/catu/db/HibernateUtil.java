@@ -1,6 +1,6 @@
 /***
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010-2014 Hércules S. S. José
 
 
 
@@ -45,6 +45,7 @@
     Marco II - Nova Iguaçu, RJ, Brasil.
 
 ***/
+
 package br.com.hslife.catu.db;
 
 

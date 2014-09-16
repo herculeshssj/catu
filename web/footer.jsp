@@ -1,6 +1,6 @@
 <%--
 
-    Copyright (c) 2010, 2011 Hércules S. S. José
+    Copyright (c) 2010-2014 Hércules S. S. José
 
 
 
@@ -77,7 +77,7 @@
 <f:subview id="rodape">
 <div id="footer">
     <p align="center">
-			CATU v2.0 &copy; 2010. Todos os direitos reservado. Desenvolvido por <a href="http://hslife.com.br/">HSlife</a>.
+			CATU v1.2 &copy; 2010-2014. Todos os direitos reservado. Desenvolvido por <a href="http://hslife.com.br/">HSlife</a>.
     </p>
 </div>
 </f:subview>
