@@ -9,9 +9,7 @@ Esta versão inclui os recursos básicos para registrar os atendimentos, emitir 
 
 Tecnologias usadas: JavaServer Faces e Hibernate, rodando sobre o MySQL.
 
-Página do projeto: http://hslife.com.br/projects/catu
-
-Requisitos:
+### Requisitos:
 
 * Java JDK SE 6 ou superior;
 * Eclipse Helios 3.6 ou superior;
@@ -19,15 +17,14 @@ Requisitos:
 * MySQL 5.0 ou superior;
 * Windows ou Linux, qualquer versão capaz de rodar os softwares acima.
 
-Links de download:
+### Links de download:
 
 * *Java JDK SE 6*: http://www.oracle.com/technetwork/java/javase/downloads/index.html
 * *Eclipse Helios*: http://www.eclipse.org/downloads
 * *Tomcat 7*: http://tomcat.apache.org/download-70.cgi
 * *MySQL 5.5*: http://dev.mysql.com/downloads/mysql/5.6.html
 
-
-Configuração do MySQL:
+### Configuração do MySQL:
 
 Após instalar o MySQL, acesse via console ou usando uma ferramenta gráfica de administração e execute os seguintes comandos:
 
