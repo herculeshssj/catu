@@ -37,4 +37,4 @@ create user 'catu'@'localhost' identified by 'c4tvc4cik3';
 grant all privileges on catu.* to 'catu'@'localhost' with grant option;
 ```
 
-Dentro do projeto, no pacote br.com.hslife.catu.db, execute os arquivos script.sql e update-script.sql para realizar a criação das tabelas da base.
+Dentro do projeto, no pacote **br.com.hslife.catu.db**, execute os arquivos **script.sql** e **update-script.sql** para realizar a criação das tabelas da base.
