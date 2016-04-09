@@ -76,7 +76,7 @@
                         <h:inputText value="#{ClienteMB.cliente.nomeCliente}" required="true" requiredMessage="Informe o nome da cliente!" maxlength="100" size="50"/>
                         
                         Setor:
-                        <h:selectOneMenu value="#{ClienteMB.idSetor}"required="true" requiredMessage="Selecione o setor!">
+                        <h:selectOneMenu value="#{ClienteMB.idSetor}" required="true" requiredMessage="Selecione o setor!">
                             <f:selectItem itemLabel="Selecione"/>
                             <f:selectItems value="#{ClienteMB.listaSetor}"/>
                         </h:selectOneMenu>

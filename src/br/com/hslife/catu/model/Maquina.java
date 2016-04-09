@@ -48,7 +48,6 @@
 
 package br.com.hslife.catu.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +74,7 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(name="Maquina")
-public class Maquina implements Serializable {
+public class Maquina {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

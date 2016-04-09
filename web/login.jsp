@@ -85,10 +85,10 @@
                                     <h:panelGrid columns="2" cellspacing="10" styleClass="jsfform">
 
                                         Login:
-                                        <h:inputText value="#{LoginMB.usuario.usuarioLogin}"required="true" requiredMessage="Informe o seu login."/>
+                                        <h:inputText value="#{LoginMB.usuario.usuarioLogin}" required="true" requiredMessage="Informe o seu login."/>
 
                                         Senha:
-                                        <h:inputSecret value="#{LoginMB.usuario.usuarioSenha}"required="true" requiredMessage="Informe a sua senha."/>
+                                        <h:inputSecret value="#{LoginMB.usuario.usuarioSenha}" required="true" requiredMessage="Informe a sua senha."/>
 
                                         <br/>
                                         <h:commandButton value="Entrar no Sistema" action="#{LoginMB.efetuarLogin}" style="padding: 3px 10px;"/>
@@ -103,7 +103,7 @@
                 </div>
                 <div id="footer">
                     <p align="center">
-			CATU v2.0 &copy; 2010. Todos os direitos reservado. Desenvolvido por <a href="http://hslife.com.br/">HSlife</a>.
+			CATU v2.0 &copy; 2010-2014. Todos os direitos reservado. Desenvolvido por <a href="mailto:herculeshssj@outlook.com">Hércules S. S. José</a>.
                     </p>
                 </div>
             </div>

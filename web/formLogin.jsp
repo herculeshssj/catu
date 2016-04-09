@@ -89,13 +89,13 @@
                         </h:selectOneMenu>
                        
                         Senha:
-                        <h:inputSecret value="#{LoginMB.usuario.usuarioSenha}"required="true" requiredMessage="Informe a senha." size="30"/>
+                        <h:inputSecret value="#{LoginMB.usuario.usuarioSenha}" required="true" requiredMessage="Informe a senha." size="30"/>
 
                         Confirme a senha:
-                        <h:inputSecret value="#{LoginMB.confirmaSenha}"required="true" requiredMessage="Confirme a senha." size="30"/>
+                        <h:inputSecret value="#{LoginMB.confirmaSenha}" required="true" requiredMessage="Confirme a senha." size="30"/>
 
                         <br/>
-                        <h:commandButton value="Cadastrar" action="#{LoginMB.salvar}"style="padding: 3px 10px;"/>
+                        <h:commandButton value="Cadastrar" action="#{LoginMB.salvar}" style="padding: 3px 10px;"/>
 
                     </h:panelGrid>
                 </h:form>

@@ -77,7 +77,7 @@
 <f:subview id="rodape">
 <div id="footer">
     <p align="center">
-			CATU v1.2 &copy; 2010-2014. Todos os direitos reservado. Desenvolvido por <a href="http://hslife.com.br/">HSlife</a>.
+			CATU v2.0 &copy; 2010-2014. Todos os direitos reservado. Desenvolvido por <a href="mailto:herculeshssj@outlook.com">Hércules S. S. José</a>.
     </p>
 </div>
 </f:subview>

@@ -46,6 +46,8 @@
 
  ***/
 
+/* Caso a base de dados já exista. Somente para o ambiente de desenvolvimento.
+ 
 -- Exclusão das constraints
 
 alter table Atendimento drop foreign key FK4654DB0366D5560;
@@ -72,7 +74,7 @@ drop table if exists Software;
 drop table if exists SoftwareInstalado;
 drop table if exists Status;
 drop table if exists Tipo;
-
+*/
 -- Criação das tabelas
 
 create table Atendimento (id bigint not null auto_increment, custo double precision, dataAbertura datetime, dataAlteracao datetime, dataEncerramento datetime, observacao text, prioridade varchar(255), problema text not null, solucao text, idCliente bigint, idOperador bigint, idSetor bigint, idStatus bigint, idTipo bigint, primary key (id));

@@ -94,13 +94,13 @@
                         <h:outputText value="#{AtendimentoMB.atendimento.idCliente.idSetor.descricao}"/>
                         
                         Situação do atendimento:
-                        <h:selectOneMenu value="#{AtendimentoMB.idStatus}"required="true" requiredMessage="Selecione a situação do atendimento!" disabled="#{AtendimentoMB.atendimento.idStatus.encerra}">
+                        <h:selectOneMenu value="#{AtendimentoMB.idStatus}" required="true" requiredMessage="Selecione a situação do atendimento!" disabled="#{AtendimentoMB.atendimento.idStatus.encerra}">
                             <f:selectItem itemLabel="Selecione"/>
                             <f:selectItems value="#{AtendimentoMB.listaStatus}"/>
                         </h:selectOneMenu>
 
                         Tipo de suporte:
-                        <h:selectOneMenu value="#{AtendimentoMB.idTipo}"required="true" requiredMessage="Selecione o tipo de atendimento!" disabled="#{AtendimentoMB.atendimento.idStatus.encerra}">
+                        <h:selectOneMenu value="#{AtendimentoMB.idTipo}" required="true" requiredMessage="Selecione o tipo de atendimento!" disabled="#{AtendimentoMB.atendimento.idStatus.encerra}">
                             <f:selectItem itemLabel="Selecione"/>
                             <f:selectItems value="#{AtendimentoMB.listaTipo}"/>
                         </h:selectOneMenu>

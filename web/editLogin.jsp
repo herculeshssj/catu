@@ -91,7 +91,7 @@
                         </h:selectOneMenu>
 
                         <br/>
-                        <h:commandButton value="Alterar" action="#{LoginMB.salvarPerfil}"style="padding: 3px 10px;"/>
+                        <h:commandButton value="Alterar" action="#{LoginMB.salvarPerfil}" style="padding: 3px 10px;"/>
 
                     </h:panelGrid>
                 </h:form>
