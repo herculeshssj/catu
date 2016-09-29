@@ -45,5 +45,5 @@ Dentro do projeto, no pacote **br.com.hslife.catu.db**, execute os arquivos **sc
 ```
 use catu;
 source /home/<nome_usuario>/catu/src/br/com/hslife/catu/db/script.sql;
-source /home/<nome_usuario>/catu/src/br/com/hslife/catu/db/update-script.sql.sql;
+source /home/<nome_usuario>/catu/src/br/com/hslife/catu/db/update-script.sql;
 ```
