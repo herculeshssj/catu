@@ -29,6 +29,9 @@ Tecnologias usadas: JavaServer Faces e Hibernate, rodando sobre o MySQL.
 Após instalar o MySQL, acesse via console ou usando uma ferramenta gráfica de administração e execute os seguintes comandos:
 
 ```sql
+-- Acesso ao prompt do MySQL
+mysql -u <nome_de_usuario> -p
+
 -- Criação da base de dados
 create database catu;
 
