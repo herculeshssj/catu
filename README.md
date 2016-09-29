@@ -41,3 +41,9 @@ grant all privileges on catu.* to 'catu'@'localhost' with grant option;
 ```
 
 Dentro do projeto, no pacote **br.com.hslife.catu.db**, execute os arquivos **script.sql** e **update-script.sql** para realizar a criação das tabelas da base.
+
+```
+use catu;
+source /home/<nome_usuario>/catu/src/br/com/hslife/catu/db/script.sql;
+source /home/<nome_usuario>/catu/src/br/com/hslife/catu/db/update-script.sql.sql;
+```
